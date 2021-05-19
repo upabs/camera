@@ -3,6 +3,7 @@ package com.oop_lab.model;
 import com.oop_lab.model.khong_gian.HinhHopChuNhat;
 import com.oop_lab.model.khong_gian.ToaDo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Room extends HinhHopChuNhat {
@@ -18,12 +19,16 @@ public class Room extends HinhHopChuNhat {
         super(danhSachCacDinh);
         // TO DO
         // tinh cao, dai, rong
+        this.danhSachDoVat = new ArrayList<DoVat>();
+        this.danhSachCamera = new ArrayList<Camera>();
     }
 
     public Room(double chieuDai, double chieuRong, double chieuCao) {
         this.chieuDai = chieuDai;
         this.chieuRong = chieuRong;
         this.chieuCao = chieuCao;
+        this.danhSachDoVat = new ArrayList<DoVat>();
+        this.danhSachCamera = new ArrayList<Camera>();
     }
 
     public void themDoVat(DoVat doVat) {

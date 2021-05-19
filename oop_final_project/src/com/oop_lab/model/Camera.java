@@ -58,4 +58,11 @@ public class Camera {
     public void setVungNhin(HinhChop vungNhin) {
         this.vungNhin = vungNhin;
     }
+
+    @Override
+    public String toString() {
+        return "Camera(" + this.getToaDo().getX()
+                + ", " + this.getToaDo().getY() + ", " + this.getToaDo().getZ()
+                + ", " + this.gocRong + ", " + this.gocCao + ")";
+    }
 }

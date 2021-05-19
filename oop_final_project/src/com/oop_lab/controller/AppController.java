@@ -50,7 +50,7 @@ public class AppController {
                     this.app.setRunning(false);
                     break;
                 default:
-                    this.view.notice("error", "...");
+                    this.view.notice("warning", "we do not support this function. enter again");
             }
         }
     }
@@ -147,9 +147,9 @@ public class AppController {
         Room room = this.roomService.createRoom(chieuCao, chieuRong, chieuDai);
 
         if (room != null)
-            this.view.notice("message", "...");
+            this.view.notice("message", "successfully created room");
         else
-            this.view.notice("error", "...");
+            this.view.notice("error", "creating room is failed");
 
         return room;
     }
@@ -158,9 +158,9 @@ public class AppController {
         Room room = this.roomService.createRoom(cacDinh);
 
         if (room != null)
-            this.view.notice("message", "...");
+            this.view.notice("message", "successfully created room");
         else
-            this.view.notice("error", "...");
+            this.view.notice("error", "creating room is failed");
 
         return room;
     }
@@ -169,9 +169,9 @@ public class AppController {
         DoVat doVat = this.doVatService.createDoVat(cacDinh);
 
         if (doVat != null)
-            this.view.notice("message", "...");
+            this.view.notice("message", "successfully created DoVat");
         else
-            this.view.notice("error", "...");
+            this.view.notice("warning", "creating DoVat failed");
 
         return doVat;
     }
@@ -180,26 +180,26 @@ public class AppController {
         Camera camera = this.cameraService.createCamera(toaDo, gocCao, gocRong);
 
         if (camera != null)
-            this.view.notice("message", "...");
+            this.view.notice("message", "successfully created " + camera);
         else
-            this.view.notice("error", "...");
+            this.view.notice("warning", "creating " + camera + " failed");
 
         return camera;
     }
 
     public void themDoVatVaoPhong(DoVat doVat) {
         if (this.roomService.themDoVat(this.app.getRoom(), doVat)) {
-            this.view.notice("message", "...");
+            this.view.notice("message", "successfully added doVat to the room");
         } else {
-            this.view.notice("error", "...");
+            this.view.notice("warning", "adding doVat to room failed");
         }
     }
 
     public void themCameraVaoPhong(Camera camera) {
         if (this.roomService.themCamera(this.app.getRoom(), camera)) {
-            this.view.notice("message", "...");
+            this.view.notice("message", "successfully added " + camera + " to the room");
         } else {
-            this.view.notice("error", "...");
+            this.view.notice("warning", "adding " + camera + " to room failed");
         }
     }
 }
