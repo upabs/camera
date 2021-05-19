@@ -10,9 +10,9 @@ import com.oop_lab.service.DoVatService;
 import com.oop_lab.service.RoomService;
 import com.oop_lab.view.AppView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class AppController {
 
@@ -75,31 +75,70 @@ public class AppController {
         this.view.showResult(results);
     }
 
-    public void readDataFromInputFile(String file) {
-        // TO DO READ DATA AND CREATE ROOM
-        List<ToaDo> cacDinhCuaPhong = null;
-        this.app.setRoom(this.createRoom(cacDinhCuaPhong));
+    public void readDataFromInputFile(String filePath) {
+        try {
+            File inputFile = new File(filePath);
+            Scanner sc = new Scanner(inputFile);
 
-        if (this.app.getRoom() == null) return;
+            // CREATE ROOM
+            String currentLine = sc.nextLine();
+            String[] datas = currentLine.replace("(", "")
+                        .replace(")", "")
+                        .replace(",", "").split(" ");
 
-        // TO DO READ DATA AND CREATE, ADD DO VAT
-        int soLuongDoVat = 0;
-        for (int i = 0; i < soLuongDoVat; i++) {
-            List<ToaDo> cacDinhCuaDoVat = null;
-            DoVat doVat = this.createDoVat(cacDinhCuaDoVat);
-            if (doVat != null)
-                this.themDoVatVaoPhong(doVat);
-        }
+            List<ToaDo> cacDinhCuaPhong = new ArrayList<ToaDo>();
+            for (int i = 0; i < 24; i += 3) {
+                cacDinhCuaPhong.add(new ToaDo(
+                        Double.parseDouble(datas[i]),
+                        Double.parseDouble(datas[i + 1]),
+                        Double.parseDouble(datas[i + 2])));
+            }
+            this.app.setRoom(this.createRoom(cacDinhCuaPhong));
+            if (this.app.getRoom() == null) return;
 
-        // TO DO READ DATA AND CREATE, ADD CAMERA
-        int soLuongCamera = 0;
-        for (int i = 0; i < soLuongCamera; i++) {
-            ToaDo toaDo = null;
-            double gocCao = 0;
-            double gocRong = 0;
-            Camera camera = this.createCamera(toaDo, gocCao, gocRong);
-            if (camera != null)
-                this.themCameraVaoPhong(camera);
+            // CREATE DO VAT AND ADD INTO ROOM
+            currentLine = sc.nextLine();
+            int soLuongDoVat = Integer.parseInt(currentLine);
+            for (int i = 0; i < soLuongDoVat; i++) {
+                currentLine = sc.nextLine();
+                datas = currentLine.replace("(", "")
+                        .replace(")", "")
+                        .replace(",", "").split(" ");
+
+                List<ToaDo> cacDinhCuaDoVat = new ArrayList<ToaDo>();
+                for (int j = 0; j < 24; j += 3) {
+                    cacDinhCuaPhong.add(new ToaDo(
+                            Double.parseDouble(datas[j]),
+                            Double.parseDouble(datas[j + 1]),
+                            Double.parseDouble(datas[j + 2])));
+                }
+                DoVat doVat = this.createDoVat(cacDinhCuaDoVat);
+                if (doVat != null)
+                    this.themDoVatVaoPhong(doVat);
+            }
+
+            // CREATE CAMERA AND ADD INTO ROOM
+            currentLine = sc.nextLine();
+            int soLuongCamera = Integer.parseInt(currentLine);
+            for (int i = 0; i < soLuongCamera; i++) {
+                currentLine = sc.nextLine();
+                datas = currentLine.replace("(", "").replace(")", "")
+                                    .replace(",", "").split(" ");
+                ToaDo toaDo = new ToaDo(
+                        Double.parseDouble(datas[0]),
+                        Double.parseDouble(datas[1]),
+                        Double.parseDouble(datas[2])
+                );
+                double gocRong = Double.parseDouble(datas[3]);
+                double gocCao = Double.parseDouble(datas[4]);
+                Camera camera = this.createCamera(toaDo, gocCao, gocRong);
+                if (camera != null)
+                    this.themCameraVaoPhong(camera);
+            }
+
+            sc.close();
+        } catch (FileNotFoundException e) {
+            this.view.notice("error", e.getMessage());
         }
 
     }
