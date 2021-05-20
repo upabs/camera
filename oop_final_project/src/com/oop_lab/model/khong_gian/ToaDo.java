@@ -39,4 +39,12 @@ public class ToaDo {
     public void setZ(double z) {
         this.z = z;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        ToaDo other = (ToaDo) obj;
+        return (other.getX() == this.x &&
+                other.getY() == this.y &&
+                other.getZ() == this.z);
+    }
 }

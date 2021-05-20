@@ -3,17 +3,40 @@ package com.oop_lab.model.khong_gian;
 public class DoanThang {
     private ToaDo a;
     private ToaDo b;
-    private ToaDo vectorPhapTuyen;
 
     public DoanThang(ToaDo a, ToaDo b) {
         this.a = a;
         this.b = b;
-        this.vectorPhapTuyen = null;
     }
 
-    public ToaDo catMatPhang(MatPhang matPhang) {
-        // TO DO
-        return null;
+    public ToaDo giaoDiemVoiMatPhang(MatPhang matPhang) {
+        DuongThang duongThang = new DuongThang(
+                a, new ToaDo(
+                b.getX() - a.getX(),
+                b.getY() - a.getY(),
+                b.getZ() - a.getZ()
+        ),true);
+        ToaDo giaoDiem = duongThang.giaoDiemVoiMatPhang(matPhang);
+
+        return this.chuaDiem(giaoDiem) ? giaoDiem : null;
+    }
+
+    public boolean chuaDiem(ToaDo toaDo) {
+        DuongThang duongThang = new DuongThang(
+                a, new ToaDo(
+                b.getX() - a.getX(),
+                b.getY() - a.getY(),
+                b.getZ() - a.getZ()
+        ),true);
+
+        return (
+                duongThang.chuaDiem(toaDo) &&
+                this.doDai() == this.a.khoangCach(toaDo) + this.b.khoangCach(toaDo)
+        );
+    }
+
+    public double doDai() {
+        return this.a.khoangCach(this.b);
     }
 
     public ToaDo getA() {
@@ -30,13 +53,5 @@ public class DoanThang {
 
     public void setB(ToaDo b) {
         this.b = b;
-    }
-
-    public ToaDo getVectorPhapTuyen() {
-        return vectorPhapTuyen;
-    }
-
-    public void setVectorPhapTuyen(ToaDo vectorPhapTuyen) {
-        this.vectorPhapTuyen = vectorPhapTuyen;
     }
 }

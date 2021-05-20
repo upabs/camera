@@ -18,4 +18,8 @@ public class DoVatService {
         // TO DO
         return true;
     }
+
+    public boolean diemNamTrongDoVat(DoVat doVat, ToaDo toaDo) {
+        return doVat.chuaDiem(toaDo);
+    }
 }

@@ -3,9 +3,13 @@ package com.oop_lab.service;
 import com.oop_lab.model.Camera;
 import com.oop_lab.model.DoVat;
 import com.oop_lab.model.Room;
+import com.oop_lab.model.khong_gian.DoanThang;
+import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RoomService {
 
@@ -85,13 +89,100 @@ public class RoomService {
         return true;
     }
 
-    public double theTichPhong(Room room) {
-        // TO DO
-        return 0;
+    public double theTichKhongGianPhong(Room room) {
+        double tongTheTichVatTrongPhong = 0;
+
+        for (DoVat doVat : room.getDanhSachDoVat())
+            tongTheTichVatTrongPhong += doVat.theTich();
+
+        return room.theTich() - tongTheTichVatTrongPhong;
     }
 
     public double theTichVungNhinThay(Room room, int x, int y, int z) {
-        // TO DO
-        return 0;
+        ToaDo dinhA = room.getCacDinh().get(Room.DINH_A);
+        ToaDo dinhB = room.getCacDinh().get(Room.DINH_B);
+        ToaDo dinhD = room.getCacDinh().get(Room.DINH_D);
+        ToaDo dinhE = room.getCacDinh().get(Room.DINH_E);
+
+        double startX = dinhA.getX();
+        double startY = dinhA.getY();
+        double startZ = dinhA.getZ();
+        double endX = dinhB.getX();
+        double endY = dinhD.getY();
+        double endZ = dinhE.getZ();
+
+        double stepX = (endX - startX + 1) / x;
+        double stepY = (endY - startY + 1) / y;
+        double stepZ = (endZ - startZ + 1) / z;
+
+        int soLuongDiemXetDuyet = 0;
+        int soLuongDiemNhinThay = 0;
+        for (double i = startZ; i <= endZ; i += stepZ) {
+            for (double j = startY; j < endY; j += stepY) {
+                for (double k = startX; k < endX; k += stepX) {
+                    ToaDo toaDoDiemDangXet = new ToaDo(k, j, i);
+
+                    if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet))
+                        continue;
+
+                    if (this.diemNamTrongVungNhinDuoc(room, toaDoDiemDangXet))
+                        soLuongDiemNhinThay += 1;
+
+                    soLuongDiemXetDuyet += 1;
+                }
+            }
+        }
+
+        return theTichKhongGianPhong(room) * soLuongDiemNhinThay / soLuongDiemXetDuyet;
+    }
+
+    public boolean diemNamTrongDoVatNaoDo(Room room, ToaDo toaDo) {
+        DoVatService doVatService = new DoVatService();
+
+        for (DoVat doVat : room.getDanhSachDoVat()) {
+            if (doVatService.diemNamTrongDoVat(doVat, toaDo))
+                return true;
+        }
+
+        return false;
+    }
+
+    public boolean diemNamTrongVungNhinDuoc(Room room, ToaDo toaDo) {
+        List<Camera> dsCamera = this.danhSachCameraCoKhaNangNhinDuocDiem(room, toaDo);
+
+        if (dsCamera.isEmpty())
+            return false;
+
+        List<DoVat> dsDoVat = room.getDanhSachDoVat();
+        for (Camera camera : dsCamera) {
+            DoanThang doanThangNoiCameraVoiDiem = new DoanThang(toaDo, camera.getToaDo());
+            boolean stop = false;
+            int i;
+            for (i = 0; i < dsDoVat.size(); i++) {
+                for (MatPhang matPhang : dsDoVat.get(i).getDanhSachCacMat()) {
+                    ToaDo giaoDiem = doanThangNoiCameraVoiDiem.giaoDiemVoiMatPhang(matPhang);
+                    if (giaoDiem != null && !giaoDiem.equals(toaDo)) {
+                        stop = true;
+                        break;
+                    }
+                }
+                if (stop) break;
+            }
+            if (i == dsDoVat.size())
+                return true;
+        }
+
+        return false;
+    }
+
+    public List<Camera> danhSachCameraCoKhaNangNhinDuocDiem(Room room, ToaDo toaDo) {
+        CameraService cameraService = new CameraService();
+        List<Camera> result = new ArrayList<Camera>();
+
+        for (Camera camera : room.getDanhSachCamera())
+            if (cameraService.diemNamTrongVungNhinDuocCuaCamera(camera, toaDo))
+                result.add(camera);
+
+        return result;
     }
 }

@@ -144,7 +144,7 @@ public class AppController {
 
         Map<String ,String> results = new HashMap<String, String>();
 
-        double theTichCanPhong = this.roomService.theTichPhong(this.app.getRoom());
+        double theTichCanPhong = this.roomService.theTichKhongGianPhong(this.app.getRoom());
         results.put("the tich phong", theTichCanPhong + "");
 
         double theTichVungNhinThay = this.roomService

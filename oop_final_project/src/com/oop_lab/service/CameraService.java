@@ -1,6 +1,8 @@
 package com.oop_lab.service;
 
 import com.oop_lab.model.Camera;
+import com.oop_lab.model.khong_gian.HinhChop;
+import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
 
 public class CameraService {
@@ -16,4 +18,11 @@ public class CameraService {
         return true;
     }
 
+    public double theTichNhinThay(Camera camera) {
+        return camera.getVungNhin().theTich();
+    }
+
+    public boolean diemNamTrongVungNhinDuocCuaCamera(Camera camera, ToaDo toaDo) {
+        return camera.getVungNhin().chuaDiem(toaDo);
+    }
 }
