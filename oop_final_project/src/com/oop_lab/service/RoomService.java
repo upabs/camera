@@ -90,7 +90,7 @@ public class RoomService {
         return 0;
     }
 
-    public double theTichVungNhinThay(Room room) {
+    public double theTichVungNhinThay(Room room, int x, int y, int z) {
         // TO DO
         return 0;
     }

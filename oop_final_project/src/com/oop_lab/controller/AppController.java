@@ -40,12 +40,16 @@ public class AppController {
         this.app.setRunning(true);
 
         while (this.app.isRunning()) {
-            int userOption = this.view.menu(this.app.getName(), "start", "exit");
+            int userOption = this.view.menu(this.app.getName(),
+                        "read file input", "show result", "exit");
             switch (userOption) {
                 case 1:
-                    this.start();
+                    this.readDataFromInputFile();
                     break;
                 case 2:
+                    this.showResult();
+                    break;
+                case 3:
                     this.view.notice("message", "goodbye");
                     this.app.setRunning(false);
                     break;
@@ -55,27 +59,9 @@ public class AppController {
         }
     }
 
-    public void start() {
-        String file = this.view.getDataInputFilePath();
-        this.readDataFromInputFile(file);
-
-        Map<String ,String> results = new HashMap<String, String>();
-
-        double theTichCanPhong = this.roomService.theTichPhong(this.app.getRoom());
-        results.put("the tich phong", theTichCanPhong + "");
-
-        double theTichVungNhinThay = this.roomService.theTichVungNhinThay(this.app.getRoom());
-        results.put("the tich nhin thay", theTichVungNhinThay + "");
-
-        results.put(
-                "ty le vung nhin duoc so voi phong",
-                (theTichVungNhinThay/theTichCanPhong) + " %"
-        );
-
-        this.view.showResult(results);
-    }
-
-    public void readDataFromInputFile(String filePath) {
+    public void readDataFromInputFile() {
+        this.view.notice(null, "enter the path of file input: ");
+        String filePath = this.view.getKeyBoard().nextLine();
         try {
             File inputFile = new File(filePath);
             Scanner sc = new Scanner(inputFile);
@@ -83,8 +69,8 @@ public class AppController {
             // CREATE ROOM
             String currentLine = sc.nextLine();
             String[] datas = currentLine.replace("(", "")
-                        .replace(")", "")
-                        .replace(",", "").split(" ");
+                    .replace(")", "")
+                    .replace(",", "").split(" ");
 
             List<ToaDo> cacDinhCuaPhong = new ArrayList<ToaDo>();
             for (int i = 0; i < 24; i += 3) {
@@ -123,7 +109,7 @@ public class AppController {
             for (int i = 0; i < soLuongCamera; i++) {
                 currentLine = sc.nextLine();
                 datas = currentLine.replace("(", "").replace(")", "")
-                                    .replace(",", "").split(" ");
+                        .replace(",", "").split(" ");
                 ToaDo toaDo = new ToaDo(
                         Double.parseDouble(datas[0]),
                         Double.parseDouble(datas[1]),
@@ -141,6 +127,36 @@ public class AppController {
             this.view.notice("error", e.getMessage());
         }
 
+    }
+
+    public void showResult() {
+        this.view.notice(null, "steps: ");
+        String[] steps = this.view.getKeyBoard().nextLine().split(" ");
+        int x = 10; // so diem duyet tren truc Ox
+        int y = 10; // so diem duyet tren truc Oy
+        int z = 10; // so diem duyet tren truc Oz
+                    // --> tong so diem duyet : x * y * z (default = 1000)
+        if (steps.length == 3) {
+            x = Integer.parseInt(steps[0]);
+            y = Integer.parseInt(steps[1]);
+            z = Integer.parseInt(steps[2]);
+        }
+
+        Map<String ,String> results = new HashMap<String, String>();
+
+        double theTichCanPhong = this.roomService.theTichPhong(this.app.getRoom());
+        results.put("the tich phong", theTichCanPhong + "");
+
+        double theTichVungNhinThay = this.roomService
+                        .theTichVungNhinThay(this.app.getRoom(), x, y, z);
+        results.put("the tich nhin thay", theTichVungNhinThay + "");
+
+        results.put(
+                "ty le vung nhin duoc so voi phong",
+                (theTichVungNhinThay/theTichCanPhong) + " %"
+        );
+
+        this.view.showResult(results);
     }
 
     public Room createRoom(double chieuCao, double chieuRong, double chieuDai) {

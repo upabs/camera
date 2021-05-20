@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class AppView {
 
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner keyBoard = new Scanner(System.in);
 
     public int menu(String title, String... options) {
         System.out.println("__________ " + title + " __________");
@@ -13,15 +13,10 @@ public class AppView {
             System.out.println((i + 1) + ". " + options[i]);
 
         System.out.print("lua chon: ");
-        int result = this.sc.nextInt();
-        this.sc.nextLine();
+        int result = this.keyBoard.nextInt();
+        this.keyBoard.nextLine();
 
         return result;
-    }
-
-    public String getDataInputFilePath() {
-        System.out.print("enter the path of data input file: ");
-        return this.sc.nextLine();
     }
 
     public void showResult(Map<String, String> results) {
@@ -32,6 +27,13 @@ public class AppView {
     }
 
     public void notice(String title, String message) {
-        System.out.println(title + ": " + message);
+        if (title == null || title.length() == 0)
+            System.out.print(message);
+        else
+            System.out.println(title + ": " + message);
+    }
+
+    public Scanner getKeyBoard() {
+        return keyBoard;
     }
 }
