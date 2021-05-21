@@ -17,11 +17,11 @@ public class DoanThang {
                 b.getZ() - a.getZ()
         ),true);
         ToaDo giaoDiem = duongThang.giaoDiemVoiMatPhang(matPhang);
-        if (giaoDiem == null)
+
+        if (giaoDiem == null || !this.chuaDiem(giaoDiem))
             return null;
 
-        return giaoDiem.khoangCach(this.a) + giaoDiem.khoangCach(this.b)
-                == this.doDai() ? giaoDiem : null;
+        return giaoDiem;
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
@@ -34,11 +34,12 @@ public class DoanThang {
 
         return (
                 duongThang.chuaDiem(toaDo) &&
-                this.doDai() == this.a.khoangCach(toaDo) + this.b.khoangCach(toaDo)
+                !toaDo.equals(this.a) && !toaDo.equals(this.b) &&
+                this.doDai() == toaDo.khoangCach(this.a) + toaDo.khoangCach(this.b)
         );
     }
 
-    public double doDai() {
+    public float doDai() {
         return this.a.khoangCach(this.b);
     }
 

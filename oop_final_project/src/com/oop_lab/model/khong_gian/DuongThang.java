@@ -20,11 +20,11 @@ public class DuongThang {
         if (this.vuongGocVoiMatPhang(matPhang))
             return this.diemThuoc.hinhChieuTrenMatPhang(matPhang);
 
-        double A = matPhang.getVectorPhapTuyen().getX();
-        double B = matPhang.getVectorPhapTuyen().getY();
-        double C = matPhang.getVectorPhapTuyen().getZ();
-        double D = matPhang.giaTriHangSoD();
-        double t = - (
+        float A = matPhang.getVectorPhapTuyen().getX();
+        float B = matPhang.getVectorPhapTuyen().getY();
+        float C = matPhang.getVectorPhapTuyen().getZ();
+        float D = matPhang.giaTriHangSoD();
+        float t = - (
                 D + this.diemThuoc.getX() * A +
                 this.diemThuoc.getY() * B +
                 this.diemThuoc.getZ() * C
@@ -42,22 +42,18 @@ public class DuongThang {
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
-        double N = (toaDo.getX() - this.diemThuoc.getX()) / this.vectorChiPhuong.getX();
+        float N = (toaDo.getX() - this.diemThuoc.getX()) / this.vectorChiPhuong.getX();
 
         return (
-                (toaDo.getY() - this.diemThuoc.getY()) / this.vectorChiPhuong.getY() == N &&
-                (toaDo.getZ() - this.diemThuoc.getZ()) / this.vectorChiPhuong.getZ() == N
+                ((toaDo.getY() - this.diemThuoc.getY()) / this.vectorChiPhuong.getY()) == N &&
+                ((toaDo.getZ() - this.diemThuoc.getZ()) / this.vectorChiPhuong.getZ()) == N
         );
     }
 
     public boolean vuongGocVoiMatPhang(MatPhang matPhang) {
         ToaDo tichCoHuong = this.vectorChiPhuong.tichCoHuong(matPhang.getVectorPhapTuyen());
 
-        return (
-            tichCoHuong.getX() == 0 &&
-            tichCoHuong.getY() == 0 &&
-            tichCoHuong.getZ() == 0
-        );
+        return tichCoHuong.equals(new ToaDo(0, 0, 0));
 
     }
 
@@ -65,9 +61,9 @@ public class DuongThang {
         if (this.vectorChiPhuong == null)
             return false;
         // (P): Ax + By + Cz + D = 0
-        double A = matPhang.getVectorPhapTuyen().getX();
-        double B = matPhang.getVectorPhapTuyen().getY();
-        double C = matPhang.getVectorPhapTuyen().getZ();
+        float A = matPhang.getVectorPhapTuyen().getX();
+        float B = matPhang.getVectorPhapTuyen().getY();
+        float C = matPhang.getVectorPhapTuyen().getZ();
 
         return A * this.vectorChiPhuong.getX() +
                 B * this.vectorChiPhuong.getY() +

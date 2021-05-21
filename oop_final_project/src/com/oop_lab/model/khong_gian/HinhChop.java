@@ -29,7 +29,7 @@ public class HinhChop {
 
         for (int i = 0; i < 5; i++) {
             this.cacDinh.put(tenDinh[i], danhSachDinh[i]);
-        };
+        }
         this.setupCacMat();
     }
 
@@ -101,7 +101,7 @@ public class HinhChop {
         ));
     }
 
-    public double theTich() {
+    public float theTich() {
         ToaDo dinhE = this.cacDinh.get(DINH_CHOP_E);
         ToaDo dinhA = this.cacDinh.get(DINH_A);
         ToaDo dinhB = this.cacDinh.get(DINH_B);
@@ -121,8 +121,9 @@ public class HinhChop {
 
         if (giaoDiem == null)
             return false;
-        if (diemM.khoangCach(dinhChopE) + diemM.khoangCach(giaoDiem)
-                != dinhChopE.khoangCach(giaoDiem)
+
+        if ((diemM.khoangCach(dinhChopE) + diemM.khoangCach(giaoDiem))
+            != dinhChopE.khoangCach(giaoDiem)
         ) return false;
 
         ToaDo dinhA = this.cacDinh.get(DINH_A);
@@ -163,19 +164,13 @@ public class HinhChop {
                 ), true
         );
 
-        if (
-            giaoDiem.khoangCachToiDuongThang(duongThangAB)
-            + giaoDiem.khoangCachToiDuongThang(duongThangDC)
+        if ((giaoDiem.khoangCachToiDuongThang(duongThangAB)
+            + giaoDiem.khoangCachToiDuongThang(duongThangDC))
             != dinhA.khoangCach(dinhD)
         ) return false;
 
-        if (
-            giaoDiem.khoangCachToiDuongThang(duongThangAD)
-            + giaoDiem.khoangCachToiDuongThang(duongThangBC)
-            != dinhA.khoangCach(dinhB)
-        ) return false;
-
-        return true;
+        return (giaoDiem.khoangCachToiDuongThang(duongThangAD)
+                + giaoDiem.khoangCachToiDuongThang(duongThangBC)) == dinhA.khoangCach(dinhB);
     }
 
     public Map<String, ToaDo> getCacDinh() {

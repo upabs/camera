@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DoVat extends HinhHopChuNhat {
     private String ten = "do vat";
-    private String mauSac = "xam";
+    private String mauSac = "xanh";
 
     public DoVat(String ten, String mauSac) {
         this.ten = ten;

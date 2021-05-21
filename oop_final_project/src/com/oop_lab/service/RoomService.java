@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RoomService {
 
-    public Room createRoom(double cao, double rong, double dai) {
+    public Room createRoom(float cao, float rong, float dai) {
         if (roomHopLe(cao, rong, dai))
             return new Room(dai, rong, cao);
         return null;
@@ -31,7 +31,7 @@ public class RoomService {
         return true;
     }
 
-    public boolean roomHopLe(double cao, double rong, double dai) {
+    public boolean roomHopLe(float cao, float rong, float dai) {
         return (cao > 0) && (rong > 0) && (dai > 0);
     }
 
@@ -84,43 +84,46 @@ public class RoomService {
             }
         }
 
+        if (matPhangChuaCam == null)
+            return;
+
         ToaDo diemH = null;
-        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_DAY_DUOI_ABCD)) {
+        if (matPhangChuaCam.equals(room.getCacMat().get(Room.MAT_DAY_DUOI_ABCD))) {
             diemH = new ToaDo(
                     camera.getToaDo().getX(),
                     camera.getToaDo().getY(),
                     camera.getToaDo().getZ() + camera.getTamNhin()
             );
         }
-        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_DAY_TREN_EFGH)) {
+        if (matPhangChuaCam.equals(room.getCacMat().get(Room.MAT_DAY_TREN_EFGH))) {
             diemH = new ToaDo(
                     camera.getToaDo().getX(),
                     camera.getToaDo().getY(),
                     camera.getToaDo().getZ() - camera.getTamNhin()
             );
         }
-        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_ADHE)) {
+        if (matPhangChuaCam.equals(room.getCacMat().get(Room.MAT_ADHE))) {
             diemH = new ToaDo(
                 camera.getToaDo().getX() + camera.getTamNhin(),
                 camera.getToaDo().getY(),
                 camera.getToaDo().getZ()
             );
         }
-        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_BCGF)) {
+        if (matPhangChuaCam.equals(room.getCacMat().get(Room.MAT_BCGF))) {
             diemH = new ToaDo(
-                camera.getToaDo().getX() - camera.getTamNhin(),
-                camera.getToaDo().getY(),
-                camera.getToaDo().getZ()
+                    camera.getToaDo().getX() - camera.getTamNhin(),
+                    camera.getToaDo().getY(),
+                    camera.getToaDo().getZ()
             );
         }
-        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_CDHG)) {
+        if (matPhangChuaCam.equals(room.getCacMat().get(Room.MAT_CDHG))) {
             diemH = new ToaDo(
                 camera.getToaDo().getX(),
                 camera.getToaDo().getY() - camera.getTamNhin(),
                 camera.getToaDo().getZ()
             );
         }
-        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_AEFB)) {
+        if (matPhangChuaCam.equals(room.getCacMat().get(Room.MAT_AEFB))) {
             diemH = new ToaDo(
                 camera.getToaDo().getX(),
                 camera.getToaDo().getY() + camera.getTamNhin(),
@@ -128,8 +131,8 @@ public class RoomService {
             );
         }
 
-        double tanRong = Math.tan(camera.getGocRong() / 2);
-        double tanCao = Math.tan(camera.getGocCao() / 2);
+        float tanRong = (float) Math.tan(Math.toRadians(camera.getGocRong() / 2));
+        float tanCao = (float) Math.tan(Math.toRadians(camera.getGocRong() / 2));
 
         camera.setVungNhin(
             new HinhChop(
@@ -157,7 +160,7 @@ public class RoomService {
 
     public boolean cameraKhongBiTrung(Room room, Camera camera) {
         for (Camera cam : room.getDanhSachCamera()) {
-            if (cam.getToaDo() == camera.getToaDo())
+            if (cam.getToaDo().equals(camera.getToaDo()))
                 return false;
         }
         return true;
@@ -167,8 +170,8 @@ public class RoomService {
         return true;
     }
 
-    public double theTichKhongGianPhong(Room room) {
-        double tongTheTichVatTrongPhong = 0;
+    public float theTichKhongGianPhong(Room room) {
+        float tongTheTichVatTrongPhong = 0;
 
         for (DoVat doVat : room.getDanhSachDoVat())
             tongTheTichVatTrongPhong += doVat.theTich();
@@ -176,33 +179,32 @@ public class RoomService {
         return room.theTich() - tongTheTichVatTrongPhong;
     }
 
-    public double theTichVungNhinThay(Room room, int x, int y, int z) {
+    public float theTichVungNhinThay(Room room, int x, int y, int z) {
         ToaDo dinhA = room.getCacDinh().get(Room.DINH_A);
         ToaDo dinhB = room.getCacDinh().get(Room.DINH_B);
         ToaDo dinhD = room.getCacDinh().get(Room.DINH_D);
         ToaDo dinhE = room.getCacDinh().get(Room.DINH_E);
 
-        double startX = dinhA.getX();
-        double startY = dinhA.getY();
-        double startZ = dinhA.getZ();
-        double endX = dinhB.getX();
-        double endY = dinhD.getY();
-        double endZ = dinhE.getZ();
+        float startX = dinhA.getX();
+        float startY = dinhA.getY();
+        float startZ = dinhA.getZ();
+        float endX = dinhB.getX();
+        float endY = dinhD.getY();
+        float endZ = dinhE.getZ();
 
-        double stepX = (endX - startX) / (x - 1);
-        double stepY = (endY - startY) / (y - 1);
-        double stepZ = (endZ - startZ) / (z - 1);
+        float stepX = (endX - startX) / (x - 1);
+        float stepY = (endY - startY) / (y - 1);
+        float stepZ = (endZ - startZ) / (z - 1);
 
         int soLuongDiemXetDuyet = 0;
         int soLuongDiemNhinThay = 0;
-        for (double i = startZ; i <= endZ; i += stepZ) {
-            for (double j = startY; j <= endY; j += stepY) {
-                for (double k = startX; k <= endX; k += stepX) {
+        for (float i = startZ; i <= endZ; i += stepZ) {
+            for (float j = startY; j <= endY; j += stepY) {
+                for (float k = startX; k <= endX; k += stepX) {
                     ToaDo toaDoDiemDangXet = new ToaDo(k, j, i);
-
-                    if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet))
+                    if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet)) {
                         continue;
-
+                    }
                     if (this.diemNamTrongVungNhinDuoc(room, toaDoDiemDangXet))
                         soLuongDiemNhinThay += 1;
 
@@ -211,7 +213,7 @@ public class RoomService {
             }
         }
 
-        return theTichKhongGianPhong(room) * soLuongDiemNhinThay / soLuongDiemXetDuyet;
+        return theTichKhongGianPhong(room) * (float) soLuongDiemNhinThay / (float) soLuongDiemXetDuyet;
     }
 
     public boolean diemNamTrongDoVatNaoDo(Room room, ToaDo toaDo) {

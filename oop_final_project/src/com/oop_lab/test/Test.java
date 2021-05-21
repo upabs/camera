@@ -27,26 +27,25 @@ public class Test {
 
         Room room = roomService.createRoom(dsDinh);
         CameraService cameraService = new CameraService();
-        Camera camera = cameraService.createCamera(new ToaDo(0, 0.5, 0.5), 90, 90);
+        Camera camera = cameraService.createCamera(new ToaDo(0f, 0.5f, 0.5f), 90, 90);
 
         roomService.themCamera(room, camera);
 
         DoVatService doVatService = new DoVatService();
         List<ToaDo> cacDinh = new ArrayList<ToaDo>();
-        cacDinh.add(new ToaDo(1, 0.25, 0));
-        cacDinh.add(new ToaDo(1.5, 0.25, 0));
-        cacDinh.add(new ToaDo(1.5, 0.75, 0));
-        cacDinh.add(new ToaDo(0.5, 0.75, 0));
-        cacDinh.add(new ToaDo(1, 0.25, 0.5));
-        cacDinh.add(new ToaDo(1.5, 0.25, 0.5));
-        cacDinh.add(new ToaDo(1.5, 0.75, 0.5));
-        cacDinh.add(new ToaDo(0.5, 0.75, 0.5));
+        cacDinh.add(new ToaDo(0.5f, 0.25f, 0));
+        cacDinh.add(new ToaDo(1.5f, 0.25f, 0));
+        cacDinh.add(new ToaDo(1.5f, 0.75f, 0));
+        cacDinh.add(new ToaDo(0.5f, 0.75f, 0));
+        cacDinh.add(new ToaDo(0.5f, 0.25f, 0.5f));
+        cacDinh.add(new ToaDo(1.5f, 0.25f, 0.5f));
+        cacDinh.add(new ToaDo(1.5f, 0.75f, 0.5f));
+        cacDinh.add(new ToaDo(0.5f, 0.75f, 0.5f));
 
         DoVat doVat = doVatService.createDoVat(cacDinh);
-//        roomService.themDoVat(room, doVat);
+        roomService.themDoVat(room, doVat);
 
-        System.out.println("the tich nhin dc: " +
-                roomService.theTichVungNhinThay(room, 100, 300, 300));
+        roomService.theTichVungNhinThay(room, 200, 200, 100);
 
     }
 }

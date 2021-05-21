@@ -1,46 +1,46 @@
 package com.oop_lab.model.khong_gian;
 
 public class ToaDo {
-    private double x;
-    private double y;
-    private double z;
+    private float x;
+    private float y;
+    private float z;
 
-    public ToaDo(double x, double y, double z) {
+    public ToaDo(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public double khoangCach(ToaDo other) {
+    public float khoangCach(ToaDo other) {
         if (other == null) return -1;
-        return Math.sqrt(Math.pow(other.x - this.x, 2) +
-                Math.pow(other.y - this.y, 2) + Math.pow(other.z - this.z, 2));
+        return (float) (Math.sqrt(Math.pow(other.getX() - this.x, 2) +
+                Math.pow(other.getY() - this.y, 2) + Math.pow(other.getZ() - this.z, 2)));
     }
 
-    public double khoangCachToiDuongThang(DuongThang duongThang) {
+    public float khoangCachToiDuongThang(DuongThang duongThang) {
         ToaDo tmp = new ToaDo(
                 duongThang.getDiemThuoc().getX() - this.x,
                 duongThang.getDiemThuoc().getY() - this.y,
                 duongThang.getDiemThuoc().getZ() - this.z
         );
 
-        double m = tmp.tichCoHuong(duongThang.getVectorChiPhuong()).khoangCachToiGocToaDo();
-        double n = duongThang.getVectorChiPhuong().khoangCachToiGocToaDo();
+        float m = tmp.tichCoHuong(duongThang.getVectorChiPhuong()).khoangCachToiGocToaDo();
+        float n = duongThang.getVectorChiPhuong().khoangCachToiGocToaDo();
 
         return m / n;
     }
 
     public ToaDo hinhChieuTrenMatPhang(MatPhang matPhang) {
         // (P): Ax + By + Cz + D = 0
-        double A = matPhang.getVectorPhapTuyen().getX();
-        double B = matPhang.getVectorPhapTuyen().getY();
-        double C = matPhang.getVectorPhapTuyen().getZ();
-        double D = - (A * matPhang.getDiemThuoc().getX() +
+        float A = matPhang.getVectorPhapTuyen().getX();
+        float B = matPhang.getVectorPhapTuyen().getY();
+        float C = matPhang.getVectorPhapTuyen().getZ();
+        float D = - (A * matPhang.getDiemThuoc().getX() +
                         B * matPhang.getDiemThuoc().getY() +
                     C * matPhang.getDiemThuoc().getZ());
 
-        double k = - (A * this.x + B * this.y + C * this.z + D)
-                / (Math.pow(A, 2) + Math.pow(B, 2) + Math.pow(C, 2));
+        float k = - (A * this.x + B * this.y + C * this.z + D)
+                / (float) (Math.pow(A, 2) + Math.pow(B, 2) + Math.pow(C, 2));
 
         return new ToaDo(
             this.x + A * k,
@@ -49,7 +49,9 @@ public class ToaDo {
         );
     }
 
-    public double khoangCachDenMatPhang(MatPhang matPhang) {
+    public float khoangCachDenMatPhang(MatPhang matPhang) {
+        if (matPhang.chuaDiem(this))
+            return 0;
         ToaDo hinhChieu = this.hinhChieuTrenMatPhang(matPhang);
         return this.khoangCach(hinhChieu);
     }
@@ -62,32 +64,32 @@ public class ToaDo {
         );
     }
 
-    public double khoangCachToiGocToaDo() {
-        return Math.sqrt(Math.pow(this.x, 2) +
-                Math.pow(this.y, 2) + Math.pow(this.z, 2));
+    public float khoangCachToiGocToaDo() {
+        return (float) (Math.sqrt(Math.pow(this.x, 2) +
+                Math.pow(this.y, 2) + Math.pow(this.z, 2)));
     }
 
-    public double getX() {
-        return this.x;
+    public float getX() {
+        return x;
     }
 
-    public void setX(double x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public double getY() {
-        return this.y;
+    public float getY() {
+        return y;
     }
 
-    public void setY(double y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public double getZ() {
-        return this.z;
+    public float getZ() {
+        return z;
     }
 
-    public void setZ(double z) {
+    public void setZ(float z) {
         this.z = z;
     }
 

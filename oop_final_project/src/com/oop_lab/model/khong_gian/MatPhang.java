@@ -22,13 +22,6 @@ public class MatPhang {
         this.vectorPhapTuyen = this.capVectorChiPhuong[0].tichCoHuong(this.capVectorChiPhuong[1]);
     }
 
-    public double khoangCachDiemToiMat(ToaDo toaDoDiemM) {
-        if (this.chuaDiem(toaDoDiemM))
-            return 0;
-        ToaDo toaDoDiemH = toaDoDiemM.hinhChieuTrenMatPhang(this);
-        return toaDoDiemM.khoangCach(toaDoDiemH);
-    }
-
     public boolean chuaDiem(ToaDo toaDo) {
         return (
             this.getVectorPhapTuyen().getX() * toaDo.getX() +
@@ -38,10 +31,10 @@ public class MatPhang {
         );
     }
 
-    public double giaTriHangSoD() {
-        double A = this.vectorPhapTuyen.getX();
-        double B = this.vectorPhapTuyen.getY();
-        double C = this.vectorPhapTuyen.getZ();
+    public float giaTriHangSoD() {
+        float A = this.vectorPhapTuyen.getX();
+        float B = this.vectorPhapTuyen.getY();
+        float C = this.vectorPhapTuyen.getZ();
 
         return - (A * this.diemThuoc.getX() + B * this.diemThuoc.getY() + C * this.diemThuoc.getZ());
     }

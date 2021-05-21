@@ -1,5 +1,6 @@
 package com.oop_lab.model.khong_gian;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,15 +27,15 @@ public class HinhHopChuNhat {
     private Map<String, ToaDo> cacDinh = new HashMap<String, ToaDo>();
     private Map<String, MatPhang> cacMat = new HashMap<String, MatPhang>();
 
-    private double chieuCao;
-    private double chieuDai;
-    private double chieuRong;
+    private float chieuCao;
+    private float chieuDai;
+    private float chieuRong;
 
     public HinhHopChuNhat() {
 
     }
 
-    public HinhHopChuNhat(double chieuCao, double chieuDai, double chieuRong) {
+    public HinhHopChuNhat(float chieuCao, float chieuDai, float chieuRong) {
         this.chieuCao = chieuCao;
         this.chieuDai = chieuDai;
         this.chieuRong = chieuRong;
@@ -93,25 +94,22 @@ public class HinhHopChuNhat {
                 ), this.cacDinh.get(DINH_C)));
     }
 
-    public double theTich() {
+    public float theTich() {
         return this.chieuCao * this.chieuDai * this.chieuRong;
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
-        if (toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_DAY_DUOI_ABCD))
-            + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_DAY_TREN_EFGH))
-            != this.chieuCao
+        if ((toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_DAY_DUOI_ABCD))
+            + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_DAY_TREN_EFGH)))
+                != this.chieuCao
         ) return false;
-        if (toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_CDHG))
-                + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_AEFB))
+        if ((toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_CDHG))
+                + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_AEFB)))
                 != this.chieuRong
         ) return false;
-        if (toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_ADHE))
-                + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_BCGF))
-                != this.chieuDai
-        ) return false;
 
-        return true;
+        return (toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_ADHE))
+                + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_BCGF))) == this.chieuDai;
     }
 
     public List<MatPhang> getDanhSachCacMat() {
@@ -134,27 +132,27 @@ public class HinhHopChuNhat {
         this.cacMat = cacMat;
     }
 
-    public double getChieuCao() {
+    public float getChieuCao() {
         return chieuCao;
     }
 
-    public void setChieuCao(double chieuCao) {
+    public void setChieuCao(float chieuCao) {
         this.chieuCao = chieuCao;
     }
 
-    public double getChieuDai() {
+    public float getChieuDai() {
         return chieuDai;
     }
 
-    public void setChieuDai(double chieuDai) {
+    public void setChieuDai(float chieuDai) {
         this.chieuDai = chieuDai;
     }
 
-    public double getChieuRong() {
+    public float getChieuRong() {
         return chieuRong;
     }
 
-    public void setChieuRong(double chieuRong) {
+    public void setChieuRong(float chieuRong) {
         this.chieuRong = chieuRong;
     }
 }

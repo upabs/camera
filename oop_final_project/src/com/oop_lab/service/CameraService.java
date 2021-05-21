@@ -7,17 +7,17 @@ import com.oop_lab.model.khong_gian.ToaDo;
 
 public class CameraService {
 
-    public Camera createCamera(ToaDo toaDo, double gocCao, double gocRong) {
+    public Camera createCamera(ToaDo toaDo, float gocCao, float gocRong) {
         if (cameraHopLe(gocCao, gocRong))
             return new Camera(toaDo, gocCao, gocRong);
         return null;
     }
 
-    public boolean cameraHopLe(double gocCao, double gocRong) {
+    public boolean cameraHopLe(float gocCao, float gocRong) {
         return (gocCao > 0 && gocRong > 0);
     }
 
-    public double theTichNhinThay(Camera camera) {
+    public float theTichNhinThay(Camera camera) {
         return camera.getVungNhin().theTich();
     }
 

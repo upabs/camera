@@ -6,16 +6,15 @@ import com.oop_lab.model.khong_gian.ToaDo;
 public class Camera {
 
     private ToaDo toaDo;
-    private double tamNhin = 1;
-    private double gocCao;
-    private double gocRong;
+    private float tamNhin = 100;
+    private float gocCao;
+    private float gocRong;
     private HinhChop vungNhin;
 
-    public Camera (ToaDo toaDo, double gocCao, double gocRong) {
+    public Camera (ToaDo toaDo, float gocCao, float gocRong) {
         this.toaDo = toaDo;
         this.gocCao = gocCao;
         this.gocRong = gocRong;
-        this.vungNhin = null;
     }
 
     public ToaDo getToaDo() {
@@ -26,27 +25,27 @@ public class Camera {
         this.toaDo = toaDo;
     }
 
-    public double getTamNhin() {
+    public float getTamNhin() {
         return tamNhin;
     }
 
-    public void setTamNhin(double tamNhin) {
+    public void setTamNhin(float tamNhin) {
         this.tamNhin = tamNhin;
     }
 
-    public double getGocCao() {
+    public float getGocCao() {
         return gocCao;
     }
 
-    public void setGocCao(double gocCao) {
+    public void setGocCao(float gocCao) {
         this.gocCao = gocCao;
     }
 
-    public double getGocRong() {
+    public float getGocRong() {
         return gocRong;
     }
 
-    public void setGocRong(double gocRong) {
+    public void setGocRong(float gocRong) {
         this.gocRong = gocRong;
     }
 

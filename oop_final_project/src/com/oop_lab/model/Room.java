@@ -15,7 +15,7 @@ public class Room extends HinhHopChuNhat {
         super(danhSachCacDinh);
     }
 
-    public Room(double chieuCao, double chieuDai, double chieuRong) {
+    public Room(float chieuCao, float chieuDai, float chieuRong) {
         super(chieuCao, chieuDai, chieuRong);
     }
 

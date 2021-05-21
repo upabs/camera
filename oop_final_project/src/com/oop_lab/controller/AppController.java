@@ -75,9 +75,9 @@ public class AppController {
             List<ToaDo> cacDinhCuaPhong = new ArrayList<ToaDo>();
             for (int i = 0; i < 24; i += 3) {
                 cacDinhCuaPhong.add(new ToaDo(
-                        Double.parseDouble(datas[i]),
-                        Double.parseDouble(datas[i + 1]),
-                        Double.parseDouble(datas[i + 2])));
+                        Float.parseFloat(datas[i]),
+                        Float.parseFloat(datas[i + 1]),
+                        Float.parseFloat(datas[i + 2])));
             }
             this.app.setRoom(this.createRoom(cacDinhCuaPhong));
             if (this.app.getRoom() == null) return;
@@ -95,9 +95,9 @@ public class AppController {
                 List<ToaDo> cacDinhCuaDoVat = new ArrayList<ToaDo>();
                 for (int j = 0; j < 24; j += 3) {
                     cacDinhCuaDoVat.add(new ToaDo(
-                            Double.parseDouble(datas[j]),
-                            Double.parseDouble(datas[j + 1]),
-                            Double.parseDouble(datas[j + 2])));
+                            Float.parseFloat(datas[j]),
+                            Float.parseFloat(datas[j + 1]),
+                            Float.parseFloat(datas[j + 2])));
                 }
                 DoVat doVat = this.createDoVat(cacDinhCuaDoVat);
                 if (doVat != null)
@@ -113,12 +113,12 @@ public class AppController {
                 datas = currentLine.replace("(", "").replace(")", "")
                         .replace(",", "").split(" ");
                 ToaDo toaDo = new ToaDo(
-                        Double.parseDouble(datas[0]),
-                        Double.parseDouble(datas[1]),
-                        Double.parseDouble(datas[2])
+                        Float.parseFloat(datas[0]),
+                        Float.parseFloat(datas[1]),
+                        Float.parseFloat(datas[2])
                 );
-                double gocRong = Double.parseDouble(datas[3]);
-                double gocCao = Double.parseDouble(datas[4]);
+                float gocRong = Float.parseFloat(datas[3]);
+                float gocCao = Float.parseFloat(datas[4]);
                 Camera camera = this.createCamera(toaDo, gocCao, gocRong);
                 if (camera != null)
                     this.themCameraVaoPhong(camera);
@@ -150,22 +150,23 @@ public class AppController {
 
         Map<String ,String> results = new HashMap<String, String>();
 
-        double theTichCanPhong = this.roomService.theTichKhongGianPhong(this.app.getRoom());
-        results.put("the tich phong", theTichCanPhong + "");
+        float theTichCanPhong = this.roomService.theTichKhongGianPhong(this.app.getRoom());
+        results.put("the tich phong", Math.round(theTichCanPhong * 100.0) / 100.0 + "");
 
-        double theTichVungNhinThay = this.roomService
+        float theTichVungNhinThay = this.roomService
                         .theTichVungNhinThay(this.app.getRoom(), x, y, z);
-        results.put("the tich nhin thay", theTichVungNhinThay + "");
+        results.put("the tich vung khuat",
+                Math.round((theTichCanPhong - theTichVungNhinThay) * 100.0) / 100.0 + "");
 
         results.put(
-                "ty le vung nhin duoc so voi phong",
-                (theTichVungNhinThay/theTichCanPhong) + " %"
+                "nhin duoc",
+                Math.round(theTichVungNhinThay/theTichCanPhong * 100.0) / 100.0 + "% can phong"
         );
 
         this.view.showResult(results);
     }
 
-    public Room createRoom(double chieuCao, double chieuRong, double chieuDai) {
+    public Room createRoom(float chieuCao, float chieuRong, float chieuDai) {
         Room room = this.roomService.createRoom(chieuCao, chieuRong, chieuDai);
 
         if (room != null)
@@ -198,7 +199,7 @@ public class AppController {
         return doVat;
     }
 
-    public Camera createCamera(ToaDo toaDo, double gocCao, double gocRong) {
+    public Camera createCamera(ToaDo toaDo, float gocCao, float gocRong) {
         Camera camera = this.cameraService.createCamera(toaDo, gocCao, gocRong);
 
         if (camera != null)
