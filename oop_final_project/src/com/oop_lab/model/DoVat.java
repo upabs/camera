@@ -6,8 +6,8 @@ import com.oop_lab.model.khong_gian.ToaDo;
 import java.util.List;
 
 public class DoVat extends HinhHopChuNhat {
-    private String ten;
-    private String mauSac;
+    private String ten = "do vat";
+    private String mauSac = "xam";
 
     public DoVat(String ten, String mauSac) {
         this.ten = ten;

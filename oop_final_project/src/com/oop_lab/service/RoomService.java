@@ -4,12 +4,12 @@ import com.oop_lab.model.Camera;
 import com.oop_lab.model.DoVat;
 import com.oop_lab.model.Room;
 import com.oop_lab.model.khong_gian.DoanThang;
+import com.oop_lab.model.khong_gian.HinhChop;
 import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class RoomService {
 
@@ -66,26 +66,104 @@ public class RoomService {
     }
 
     public boolean themCamera(Room room, Camera camera) {
-        if (!cameraNamTrenTuong(room, camera)) return false;
+        if (cameraNamTrenTuong(room, camera) == null) return false;
         if (!cameraKhongBiTrung(room, camera)) return false;
         if (!cameraSoiVaoTrongPhong(room, camera)) return false;
 
+        this.setupVungNhinCameraTuongUngVoiPhong(room, camera);
         room.themCamera(camera);
         return true;
     }
 
-    public boolean cameraNamTrenTuong(Room room, Camera camera) {
-        // TO DO
-        return true;
+    public void setupVungNhinCameraTuongUngVoiPhong(Room room, Camera camera) {
+        MatPhang matPhangChuaCam = null;
+        for (MatPhang matPhang : room.getDanhSachCacMat()) {
+            if (matPhang.chuaDiem(camera.getToaDo())) {
+                matPhangChuaCam = matPhang;
+                break;
+            }
+        }
+
+        ToaDo diemH = null;
+        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_DAY_DUOI_ABCD)) {
+            diemH = new ToaDo(
+                    camera.getToaDo().getX(),
+                    camera.getToaDo().getY(),
+                    camera.getToaDo().getZ() + camera.getTamNhin()
+            );
+        }
+        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_DAY_TREN_EFGH)) {
+            diemH = new ToaDo(
+                    camera.getToaDo().getX(),
+                    camera.getToaDo().getY(),
+                    camera.getToaDo().getZ() - camera.getTamNhin()
+            );
+        }
+        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_ADHE)) {
+            diemH = new ToaDo(
+                camera.getToaDo().getX() + camera.getTamNhin(),
+                camera.getToaDo().getY(),
+                camera.getToaDo().getZ()
+            );
+        }
+        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_BCGF)) {
+            diemH = new ToaDo(
+                camera.getToaDo().getX() - camera.getTamNhin(),
+                camera.getToaDo().getY(),
+                camera.getToaDo().getZ()
+            );
+        }
+        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_CDHG)) {
+            diemH = new ToaDo(
+                camera.getToaDo().getX(),
+                camera.getToaDo().getY() - camera.getTamNhin(),
+                camera.getToaDo().getZ()
+            );
+        }
+        if (matPhangChuaCam == room.getCacMat().get(Room.MAT_AEFB)) {
+            diemH = new ToaDo(
+                camera.getToaDo().getX(),
+                camera.getToaDo().getY() + camera.getTamNhin(),
+                camera.getToaDo().getZ()
+            );
+        }
+
+        double tanRong = Math.tan(camera.getGocRong() / 2);
+        double tanCao = Math.tan(camera.getGocCao() / 2);
+
+        camera.setVungNhin(
+            new HinhChop(
+                camera.getToaDo(),
+                new ToaDo(diemH.getX(), diemH.getY(), diemH.getZ() +
+                        camera.getToaDo().khoangCach(diemH) * tanRong),
+                new ToaDo(diemH.getX(), diemH.getY() -
+                        camera.getToaDo().khoangCach(diemH) * tanCao, diemH.getZ()),
+                new ToaDo(diemH.getX(), diemH.getY(), diemH.getZ() -
+                        camera.getToaDo().khoangCach(diemH) * tanRong),
+                new ToaDo(diemH.getX(), diemH.getY() +
+                        camera.getToaDo().khoangCach(diemH) * tanCao, diemH.getZ())
+            )
+        );
+    }
+
+    public MatPhang cameraNamTrenTuong(Room room, Camera camera) {
+        for (MatPhang matPhang : room.getDanhSachCacMat()) {
+            if (matPhang.chuaDiem(camera.getToaDo())) {
+                return matPhang;
+            }
+        }
+        return null;
     }
 
     public boolean cameraKhongBiTrung(Room room, Camera camera) {
-        // TO DO
+        for (Camera cam : room.getDanhSachCamera()) {
+            if (cam.getToaDo() == camera.getToaDo())
+                return false;
+        }
         return true;
     }
 
     public boolean cameraSoiVaoTrongPhong(Room room, Camera camera) {
-        // TO DO
         return true;
     }
 
@@ -111,15 +189,15 @@ public class RoomService {
         double endY = dinhD.getY();
         double endZ = dinhE.getZ();
 
-        double stepX = (endX - startX + 1) / x;
-        double stepY = (endY - startY + 1) / y;
-        double stepZ = (endZ - startZ + 1) / z;
+        double stepX = (endX - startX) / (x - 1);
+        double stepY = (endY - startY) / (y - 1);
+        double stepZ = (endZ - startZ) / (z - 1);
 
         int soLuongDiemXetDuyet = 0;
         int soLuongDiemNhinThay = 0;
         for (double i = startZ; i <= endZ; i += stepZ) {
-            for (double j = startY; j < endY; j += stepY) {
-                for (double k = startX; k < endX; k += stepX) {
+            for (double j = startY; j <= endY; j += stepY) {
+                for (double k = startX; k <= endX; k += stepX) {
                     ToaDo toaDoDiemDangXet = new ToaDo(k, j, i);
 
                     if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet))
@@ -161,15 +239,16 @@ public class RoomService {
             for (i = 0; i < dsDoVat.size(); i++) {
                 for (MatPhang matPhang : dsDoVat.get(i).getDanhSachCacMat()) {
                     ToaDo giaoDiem = doanThangNoiCameraVoiDiem.giaoDiemVoiMatPhang(matPhang);
-                    if (giaoDiem != null && !giaoDiem.equals(toaDo)) {
+                    if (giaoDiem != null) {
                         stop = true;
                         break;
                     }
                 }
                 if (stop) break;
             }
-            if (i == dsDoVat.size())
+            if (i == dsDoVat.size()) {
                 return true;
+            }
         }
 
         return false;
@@ -182,7 +261,6 @@ public class RoomService {
         for (Camera camera : room.getDanhSachCamera())
             if (cameraService.diemNamTrongVungNhinDuocCuaCamera(camera, toaDo))
                 result.add(camera);
-
         return result;
     }
 }

@@ -8,16 +8,37 @@ public class DuongThang {
     public DuongThang(ToaDo diemThuoc, ToaDo vector, boolean chiPhuong) {
         this.diemThuoc = diemThuoc;
         if (chiPhuong)
-            this.vectorPhapTuyen = vector;
+            this.vectorChiPhuong = vector;
         else
             this.vectorPhapTuyen = vector;
     }
 
     public ToaDo giaoDiemVoiMatPhang(MatPhang matPhang) {
-        if (this.catMatPhang(matPhang)) {
-            // TO DO
-        }
-        return null;
+        if (!this.catMatPhang(matPhang))
+            return null;
+
+        if (this.vuongGocVoiMatPhang(matPhang))
+            return this.diemThuoc.hinhChieuTrenMatPhang(matPhang);
+
+        double A = matPhang.getVectorPhapTuyen().getX();
+        double B = matPhang.getVectorPhapTuyen().getY();
+        double C = matPhang.getVectorPhapTuyen().getZ();
+        double D = matPhang.giaTriHangSoD();
+        double t = - (
+                D + this.diemThuoc.getX() * A +
+                this.diemThuoc.getY() * B +
+                this.diemThuoc.getZ() * C
+            ) / (
+                this.vectorChiPhuong.getX() * A +
+                this.vectorChiPhuong.getY() * B +
+                this.vectorChiPhuong.getZ() * C
+            );
+
+        return new ToaDo(
+            this.diemThuoc.getX() + this.vectorChiPhuong.getX() * t,
+            this.diemThuoc.getY() + this.vectorChiPhuong.getY() * t,
+            this.diemThuoc.getZ() + this.vectorChiPhuong.getZ() * t
+        );
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
@@ -29,18 +50,28 @@ public class DuongThang {
         );
     }
 
+    public boolean vuongGocVoiMatPhang(MatPhang matPhang) {
+        ToaDo tichCoHuong = this.vectorChiPhuong.tichCoHuong(matPhang.getVectorPhapTuyen());
+
+        return (
+            tichCoHuong.getX() == 0 &&
+            tichCoHuong.getY() == 0 &&
+            tichCoHuong.getZ() == 0
+        );
+
+    }
+
     public boolean catMatPhang(MatPhang matPhang) {
         if (this.vectorChiPhuong == null)
             return false;
-
         // (P): Ax + By + Cz + D = 0
         double A = matPhang.getVectorPhapTuyen().getX();
         double B = matPhang.getVectorPhapTuyen().getY();
         double C = matPhang.getVectorPhapTuyen().getZ();
 
-        return (A * this.vectorChiPhuong.getX() +
+        return A * this.vectorChiPhuong.getX() +
                 B * this.vectorChiPhuong.getY() +
-                C * this.vectorChiPhuong.getZ() != 0);
+                C * this.vectorChiPhuong.getZ() != 0;
     }
 
     public ToaDo getDiemThuoc() {

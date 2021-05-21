@@ -85,6 +85,7 @@ public class AppController {
             // CREATE DO VAT AND ADD INTO ROOM
             currentLine = sc.nextLine();
             int soLuongDoVat = Integer.parseInt(currentLine);
+            this.view.notice("log", "so luong do vat (trong file input): " + soLuongDoVat);
             for (int i = 0; i < soLuongDoVat; i++) {
                 currentLine = sc.nextLine();
                 datas = currentLine.replace("(", "")
@@ -93,7 +94,7 @@ public class AppController {
 
                 List<ToaDo> cacDinhCuaDoVat = new ArrayList<ToaDo>();
                 for (int j = 0; j < 24; j += 3) {
-                    cacDinhCuaPhong.add(new ToaDo(
+                    cacDinhCuaDoVat.add(new ToaDo(
                             Double.parseDouble(datas[j]),
                             Double.parseDouble(datas[j + 1]),
                             Double.parseDouble(datas[j + 2])));
@@ -106,6 +107,7 @@ public class AppController {
             // CREATE CAMERA AND ADD INTO ROOM
             currentLine = sc.nextLine();
             int soLuongCamera = Integer.parseInt(currentLine);
+            this.view.notice("log", "so luong camera (trong file input): " + soLuongCamera);
             for (int i = 0; i < soLuongCamera; i++) {
                 currentLine = sc.nextLine();
                 datas = currentLine.replace("(", "").replace(")", "")
@@ -130,12 +132,16 @@ public class AppController {
     }
 
     public void showResult() {
-        this.view.notice(null, "steps: ");
+        if (this.app.getRoom() == null) {
+            this.view.notice("warning", "you haven't created a room yet");
+            return;
+        }
+        this.view.notice(null, "power: ");
         String[] steps = this.view.getKeyBoard().nextLine().split(" ");
-        int x = 10; // so diem duyet tren truc Ox
-        int y = 10; // so diem duyet tren truc Oy
-        int z = 10; // so diem duyet tren truc Oz
-                    // --> tong so diem duyet : x * y * z (default = 1000)
+        int x = 100; // so diem duyet tren truc Ox
+        int y = 100; // so diem duyet tren truc Oy
+        int z = 100; // so diem duyet tren truc Oz
+                    // --> tong so diem duyet : x * y * z (default = 1000000)
         if (steps.length == 3) {
             x = Integer.parseInt(steps[0]);
             y = Integer.parseInt(steps[1]);

@@ -6,7 +6,7 @@ import com.oop_lab.model.khong_gian.ToaDo;
 public class Camera {
 
     private ToaDo toaDo;
-    private double tamNhin;
+    private double tamNhin = 1;
     private double gocCao;
     private double gocRong;
     private HinhChop vungNhin;
@@ -15,8 +15,7 @@ public class Camera {
         this.toaDo = toaDo;
         this.gocCao = gocCao;
         this.gocRong = gocRong;
-        this.tamNhin = 100;
-        this.vungNhin = null; // TO DO
+        this.vungNhin = null;
     }
 
     public ToaDo getToaDo() {
@@ -61,8 +60,8 @@ public class Camera {
 
     @Override
     public String toString() {
-        return "Camera(" + this.getToaDo().getX()
+        return "Camera{" + this.getToaDo().getX()
                 + ", " + this.getToaDo().getY() + ", " + this.getToaDo().getZ()
-                + ", " + this.gocRong + ", " + this.gocCao + ")";
+                + ", " + this.gocRong + ", " + this.gocCao + "}";
     }
 }

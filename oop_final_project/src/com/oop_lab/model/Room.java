@@ -8,27 +8,15 @@ import java.util.List;
 
 public class Room extends HinhHopChuNhat {
 
-    private double chieuDai;
-    private double chieuRong;
-    private double chieuCao;
-
-    private List<DoVat> danhSachDoVat;
-    private List<Camera> danhSachCamera;
+    private List<DoVat> danhSachDoVat = new ArrayList<DoVat>();
+    private List<Camera> danhSachCamera = new ArrayList<Camera>();
 
     public Room(List<ToaDo> danhSachCacDinh) {
         super(danhSachCacDinh);
-        // TO DO
-        // tinh cao, dai, rong
-        this.danhSachDoVat = new ArrayList<DoVat>();
-        this.danhSachCamera = new ArrayList<Camera>();
     }
 
-    public Room(double chieuDai, double chieuRong, double chieuCao) {
-        this.chieuDai = chieuDai;
-        this.chieuRong = chieuRong;
-        this.chieuCao = chieuCao;
-        this.danhSachDoVat = new ArrayList<DoVat>();
-        this.danhSachCamera = new ArrayList<Camera>();
+    public Room(double chieuCao, double chieuDai, double chieuRong) {
+        super(chieuCao, chieuDai, chieuRong);
     }
 
     public void themDoVat(DoVat doVat) {
@@ -39,31 +27,6 @@ public class Room extends HinhHopChuNhat {
         this.danhSachCamera.add(camera);
     }
 
-    public double getChieuDai() {
-        return chieuDai;
-    }
-
-    public void setChieuDai(double chieuDai) {
-        this.chieuDai = chieuDai;
-    }
-
-    public double getChieuRong() {
-        return chieuRong;
-    }
-
-    public void setChieuRong(double chieuRong) {
-        this.chieuRong = chieuRong;
-    }
-
-    @Override
-    public double getChieuCao() {
-        return chieuCao;
-    }
-
-    @Override
-    public void setChieuCao(double chieuCao) {
-        this.chieuCao = chieuCao;
-    }
 
     public List<DoVat> getDanhSachDoVat() {
         return danhSachDoVat;

@@ -14,8 +14,7 @@ public class CameraService {
     }
 
     public boolean cameraHopLe(double gocCao, double gocRong) {
-        // TO DO
-        return true;
+        return (gocCao > 0 && gocRong > 0);
     }
 
     public double theTichNhinThay(Camera camera) {
