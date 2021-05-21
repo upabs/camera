@@ -7,6 +7,7 @@ import com.oop_lab.model.khong_gian.DoanThang;
 import com.oop_lab.model.khong_gian.HinhChop;
 import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
+import com.oop_lab.model.khong_gian.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -180,35 +181,87 @@ public class RoomService {
     }
 
     public float theTichVungNhinThay(Room room, int x, int y, int z) {
+        // ToaDo dinhA = room.getCacDinh().get(Room.DINH_A);
+        // ToaDo dinhB = room.getCacDinh().get(Room.DINH_B);
+        // ToaDo dinhD = room.getCacDinh().get(Room.DINH_D);
+        // ToaDo dinhE = room.getCacDinh().get(Room.DINH_E);
+
+        // float startX = dinhA.getX();
+        // float startY = dinhA.getY();
+        // float startZ = dinhA.getZ();
+        // float endX = dinhB.getX();
+        // float endY = dinhD.getY();
+        // float endZ = dinhE.getZ();
+
+        // float stepX = (endX - startX) / (x - 1);
+        // float stepY = (endY - startY) / (y - 1);
+        // float stepZ = (endZ - startZ) / (z - 1);
+
+        // int soLuongDiemXetDuyet = 0;
+        // int soLuongDiemNhinThay = 0;
+        // for (float i = startZ; i <= endZ; i += stepZ) {
+        //     for (float j = startY; j <= endY; j += stepY) {
+        //         for (float k = startX; k <= endX; k += stepX) {
+                    
+        //             ToaDo toaDoDiemDangXet = new ToaDo(k, j, i);
+        //             if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet)) {
+        //                 continue;
+        //             }
+        //             if (this.diemNamTrongVungNhinDuoc(room, toaDoDiemDangXet))
+        //                 soLuongDiemNhinThay += 1;
+
+        //             soLuongDiemXetDuyet += 1;
+        //         }
+        //     }
+        // }
+
         ToaDo dinhA = room.getCacDinh().get(Room.DINH_A);
         ToaDo dinhB = room.getCacDinh().get(Room.DINH_B);
         ToaDo dinhD = room.getCacDinh().get(Room.DINH_D);
         ToaDo dinhE = room.getCacDinh().get(Room.DINH_E);
 
-        float startX = dinhA.getX();
-        float startY = dinhA.getY();
-        float startZ = dinhA.getZ();
-        float endX = dinhB.getX();
-        float endY = dinhD.getY();
-        float endZ = dinhE.getZ();
+        Vector v_AB = new Vector(dinhA, dinhB);
+        Vector v_AD = new Vector(dinhA, dinhD);
+        Vector v_AE = new Vector(dinhA, dinhE);
+        // System.out.println(v_AB.doDai()+ "; " + v_AD.doDai() + "; " + v_AE.doDai());
+        
+        Vector stepAB = v_AB.nhanFloat(1.0f / (x-1));
+        Vector stepAD = v_AD.nhanFloat(1.0f / (y-1));
+        Vector stepAE = v_AE.nhanFloat(1.0f / (z-1));
 
-        float stepX = (endX - startX) / (x - 1);
-        float stepY = (endY - startY) / (y - 1);
-        float stepZ = (endZ - startZ) / (z - 1);
+        // System.out.println(1.0f/(x-1) + "; " + 1.0f/(y-1) + "; " + 1.0f/(z-1));
 
+        // float dAB = v_AB.doDai() / (x-1);
+        // float dAD = v_AD.doDai() / (y-1);
+        // float dAE = v_AE.doDai() / (z-1);
+
+        // Vector stepAB = v_AB.nhanFloat(dAB/v_AB.doDai());
+        // Vector stepAD = v_AD.nhanFloat(dAD/v_AD.doDai());
+        // Vector stepAE = v_AE.nhanFloat(dAE/v_AE.doDai());
+
+        // System.out.println(dAB + "; " + dAD + "; " + dAE);
         int soLuongDiemXetDuyet = 0;
         int soLuongDiemNhinThay = 0;
-        for (float i = startZ; i <= endZ; i += stepZ) {
-            for (float j = startY; j <= endY; j += stepY) {
-                for (float k = startX; k <= endX; k += stepX) {
-                    ToaDo toaDoDiemDangXet = new ToaDo(k, j, i);
+        
+        ToaDo toaDoDiemDangXet;
+        for (int k = 0; k < z; k++) {
+            for (int j = 0; j < y; j++) {
+                for (int i = 0; i < x; i++) {
+                    toaDoDiemDangXet = new ToaDo(dinhA);
+                    
+                    toaDoDiemDangXet.tinhTien(stepAB.nhanFloat(i));
+                    toaDoDiemDangXet.tinhTien(stepAD.nhanFloat(j));
+                    toaDoDiemDangXet.tinhTien(stepAE.nhanFloat(k));
+                    
                     if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet)) {
                         continue;
                     }
+
                     if (this.diemNamTrongVungNhinDuoc(room, toaDoDiemDangXet))
                         soLuongDiemNhinThay += 1;
 
                     soLuongDiemXetDuyet += 1;
+                    // System.out.println(toaDoDiemDangXet.toString());
                 }
             }
         }

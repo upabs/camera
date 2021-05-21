@@ -10,12 +10,9 @@ public class DoanThang {
     }
 
     public ToaDo giaoDiemVoiMatPhang(MatPhang matPhang) {
-        DuongThang duongThang = new DuongThang(
-                a, new ToaDo(
-                b.getX() - a.getX(),
-                b.getY() - a.getY(),
-                b.getZ() - a.getZ()
-        ),true);
+        DuongThang duongThang = new DuongThang (
+                a, new Vector(a, b), true);
+
         ToaDo giaoDiem = duongThang.giaoDiemVoiMatPhang(matPhang);
 
         if (giaoDiem == null || !this.chuaDiem(giaoDiem))
@@ -26,11 +23,7 @@ public class DoanThang {
 
     public boolean chuaDiem(ToaDo toaDo) {
         DuongThang duongThang = new DuongThang(
-                a, new ToaDo(
-                b.getX() - a.getX(),
-                b.getY() - a.getY(),
-                b.getZ() - a.getZ()
-        ),true);
+                a, new Vector(a, b), true);
 
         return (
                 duongThang.chuaDiem(toaDo) &&

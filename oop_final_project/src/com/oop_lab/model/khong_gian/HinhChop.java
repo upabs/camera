@@ -36,68 +36,32 @@ public class HinhChop {
     private void setupCacMat() {
         this.cacMat.put(MAT_DAY_ABCD, new MatPhang(
                 this.cacDinh.get(DINH_A),
-                new ToaDo(
-                        this.cacDinh.get(DINH_B).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_B).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_B).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ),
-                new ToaDo(
-                        this.cacDinh.get(DINH_C).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_C).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_C).getZ() - this.cacDinh.get(DINH_A).getZ()
-                )
+                this.cacDinh.get(DINH_B),
+                this.cacDinh.get(DINH_C)
         ));
+
         this.cacMat.put(MAT_EAB, new MatPhang(
                 this.cacDinh.get(DINH_A),
-                new ToaDo(
-                        this.cacDinh.get(DINH_B).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_B).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_B).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ),
-                new ToaDo(
-                        this.cacDinh.get(DINH_CHOP_E).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_CHOP_E).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_CHOP_E).getZ() - this.cacDinh.get(DINH_A).getZ()
-                )
+                this.cacDinh.get(DINH_B),
+                this.cacDinh.get(DINH_CHOP_E)
         ));
+
         this.cacMat.put(MAT_EAD, new MatPhang(
                 this.cacDinh.get(DINH_A),
-                new ToaDo(
-                        this.cacDinh.get(DINH_D).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_D).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_D).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ),
-                new ToaDo(
-                        this.cacDinh.get(DINH_CHOP_E).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_CHOP_E).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_CHOP_E).getZ() - this.cacDinh.get(DINH_A).getZ()
-                )
+                this.cacDinh.get(DINH_D),
+                this.cacDinh.get(DINH_CHOP_E)
         ));
+
         this.cacMat.put(MAT_EDC, new MatPhang(
+                this.cacDinh.get(DINH_D),
                 this.cacDinh.get(DINH_C),
-                new ToaDo(
-                        this.cacDinh.get(DINH_D).getX() - this.cacDinh.get(DINH_CHOP_E).getX(),
-                        this.cacDinh.get(DINH_D).getY() - this.cacDinh.get(DINH_CHOP_E).getY(),
-                        this.cacDinh.get(DINH_D).getZ() - this.cacDinh.get(DINH_CHOP_E).getZ()
-                ),
-                new ToaDo(
-                        this.cacDinh.get(DINH_C).getX() - this.cacDinh.get(DINH_CHOP_E).getX(),
-                        this.cacDinh.get(DINH_C).getY() - this.cacDinh.get(DINH_CHOP_E).getY(),
-                        this.cacDinh.get(DINH_C).getZ() - this.cacDinh.get(DINH_CHOP_E).getZ()
-                )
+                this.cacDinh.get(DINH_CHOP_E)
         ));
+
         this.cacMat.put(MAT_ECB, new MatPhang(
+                this.cacDinh.get(DINH_B),
                 this.cacDinh.get(DINH_C),
-                new ToaDo(
-                        this.cacDinh.get(DINH_B).getX() - this.cacDinh.get(DINH_CHOP_E).getX(),
-                        this.cacDinh.get(DINH_B).getY() - this.cacDinh.get(DINH_CHOP_E).getY(),
-                        this.cacDinh.get(DINH_B).getZ() - this.cacDinh.get(DINH_CHOP_E).getZ()
-                ),
-                new ToaDo(
-                        this.cacDinh.get(DINH_C).getX() - this.cacDinh.get(DINH_CHOP_E).getX(),
-                        this.cacDinh.get(DINH_C).getY() - this.cacDinh.get(DINH_CHOP_E).getY(),
-                        this.cacDinh.get(DINH_C).getZ() - this.cacDinh.get(DINH_CHOP_E).getZ()
-                )
+                this.cacDinh.get(DINH_CHOP_E)
         ));
     }
 
@@ -114,9 +78,8 @@ public class HinhChop {
     public boolean chuaDiem(ToaDo diemM) {
         ToaDo dinhChopE = this.cacDinh.get(DINH_CHOP_E);
         DuongThang duongThangNoiDinhChopVoiDiemM = new DuongThang(
-                dinhChopE, new ToaDo(diemM.getX() - dinhChopE.getX(),
-                diemM.getY() - dinhChopE.getY(), diemM.getZ() - dinhChopE.getZ()
-        ), true);
+                dinhChopE, new Vector(dinhChopE, diemM), true);
+
         ToaDo giaoDiem = duongThangNoiDinhChopVoiDiemM.giaoDiemVoiMatPhang(this.cacMat.get(MAT_DAY_ABCD));
 
         if (giaoDiem == null)
@@ -133,35 +96,23 @@ public class HinhChop {
 
         DuongThang duongThangAB = new DuongThang(
                 dinhA,
-                new ToaDo(
-                    dinhB.getX() - dinhA.getX(),
-                    dinhB.getY() - dinhA.getY(),
-                    dinhB.getZ() - dinhA.getZ()
-                ), true
+                new Vector(dinhA, dinhB), 
+                true
         );
         DuongThang duongThangAD = new DuongThang(
                 dinhA,
-                new ToaDo(
-                        dinhD.getX() - dinhA.getX(),
-                        dinhD.getY() - dinhA.getY(),
-                        dinhD.getZ() - dinhA.getZ()
-                ), true
+                new Vector(dinhA, dinhD), 
+                true
         );
         DuongThang duongThangBC = new DuongThang(
                 dinhB,
-                new ToaDo(
-                        dinhC.getX() - dinhB.getX(),
-                        dinhC.getY() - dinhB.getY(),
-                        dinhC.getZ() - dinhB.getZ()
-                ), true
+                new Vector(dinhB, dinhC), 
+                true
         );
         DuongThang duongThangDC = new DuongThang(
                 dinhD,
-                new ToaDo(
-                        dinhC.getX() - dinhD.getX(),
-                        dinhC.getY() - dinhD.getY(),
-                        dinhC.getZ() - dinhD.getZ()
-                ), true
+                new Vector(dinhD, dinhC), 
+                true
         );
 
         if ((giaoDiem.khoangCachToiDuongThang(duongThangAB)

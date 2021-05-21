@@ -57,41 +57,28 @@ public class HinhHopChuNhat {
 
     private void setCacMatPhang() {
         this.cacMat.put(MAT_DAY_DUOI_ABCD, new MatPhang(
-                new ToaDo(
-                        this.cacDinh.get(DINH_E).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_E).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_E).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ), this.cacDinh.get(DINH_A)));
+                new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_E)), 
+                this.cacDinh.get(DINH_A)));
+                
         this.cacMat.put(MAT_DAY_TREN_EFGH, new MatPhang(
-                new ToaDo(
-                        this.cacDinh.get(DINH_E).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_E).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_E).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ), this.cacDinh.get(DINH_E)));
+                new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_E)), 
+                this.cacDinh.get(DINH_E)));
+
         this.cacMat.put(MAT_AEFB, new MatPhang(
-                new ToaDo(
-                        this.cacDinh.get(DINH_D).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_D).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_D).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ), this.cacDinh.get(DINH_A)));
+                new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_D)), 
+                this.cacDinh.get(DINH_A)));
+
         this.cacMat.put(MAT_ADHE, new MatPhang(
-                new ToaDo(
-                        this.cacDinh.get(DINH_B).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_B).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_B).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ), this.cacDinh.get(DINH_A)));
+                new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_B)), 
+                this.cacDinh.get(DINH_A)));
+
         this.cacMat.put(MAT_BCGF, new MatPhang(
-                new ToaDo(
-                        this.cacDinh.get(DINH_B).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_B).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_B).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ), this.cacDinh.get(DINH_B)));
+                new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_B)), 
+                this.cacDinh.get(DINH_B)));
+
         this.cacMat.put(MAT_CDHG, new MatPhang(
-                new ToaDo(
-                        this.cacDinh.get(DINH_D).getX() - this.cacDinh.get(DINH_A).getX(),
-                        this.cacDinh.get(DINH_D).getY() - this.cacDinh.get(DINH_A).getY(),
-                        this.cacDinh.get(DINH_D).getZ() - this.cacDinh.get(DINH_A).getZ()
-                ), this.cacDinh.get(DINH_C)));
+                new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_D)), 
+                this.cacDinh.get(DINH_C)));
     }
 
     public float theTich() {
