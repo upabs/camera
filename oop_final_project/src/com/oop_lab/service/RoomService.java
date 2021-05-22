@@ -73,23 +73,67 @@ public class RoomService {
         return true;
     }
 
-    public boolean doVatNamTrongPhong(Room roomm, DoVat doVat) {
+    public boolean doVatNamTrongPhong(Room room, DoVat doVat) {
         // TO DO
-        return true;
+        if (room.chuaDiem(doVat.getCacDinh().get("A"))
+                && room.chuaDiem(doVat.getCacDinh().get("B"))
+                && room.chuaDiem(doVat.getCacDinh().get("C"))
+                && room.chuaDiem(doVat.getCacDinh().get("D"))
+                && room.chuaDiem(doVat.getCacDinh().get("E"))
+                && room.chuaDiem(doVat.getCacDinh().get("F"))
+                && room.chuaDiem(doVat.getCacDinh().get("G"))
+                && room.chuaDiem(doVat.getCacDinh().get("H")))
+        {
+            return true;
+        }
+        return false;
+
     }
 
     public boolean doVatKhongChamTran(Room room, DoVat doVat) {
         // TO DO
+
+        if(room.getCacMat().get("EFGH").chuaDiem(doVat.getCacDinh().get("E")))
+        {
+            return false;
+        }
         return true;
     }
 
     public boolean doVatKhongBiVuong(Room room, DoVat doVat) {
         // TO DO
+//        List<DoVat> doVats =  room.getDanhSachDoVat();
+        for (DoVat dsVat : room.getDanhSachDoVat()) {
+
+            // DoVat them vao` co' dinh nam` trong Vat khac
+            for (ToaDo dsDinh : doVat.getCacDinh().values()) {
+                if (dsVat.chuaDiem(dsDinh))
+                    return false;
+            }
+
+            // ton` tai doVat co' dinh nam` trong doVat them vao`
+            for (ToaDo dsDinh : dsVat.getCacDinh().values()) {
+                if (doVat.chuaDiem(dsDinh))
+                    return false;
+            }
+
+        }
         return true;
     }
 
     public boolean doVatNamTrenSanHoacTrenVatKhac(Room room, DoVat doVat) {
         // TO DO
+        if(!room.getCacMat().get("ABDC").chuaDiem(doVat.getCacDinh().get("A")))
+        {
+            return false;
+        }
+        for(DoVat dsVat : room.getDanhSachDoVat())
+        {
+            if(!dsVat.getDanhSachCacMat().get(1).chuaDiem(doVat.getCacDinh().get("A")))
+            {
+                return false;
+            }
+        }
         return true;
     }
 
