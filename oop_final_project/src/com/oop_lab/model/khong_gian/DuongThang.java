@@ -1,5 +1,8 @@
 package com.oop_lab.model.khong_gian;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DuongThang {
     private ToaDo diemThuoc;
     private Vector vectorPhapTuyen;
@@ -39,6 +42,80 @@ public class DuongThang {
             this.diemThuoc.getY() + this.vectorChiPhuong.getY() * t,
             this.diemThuoc.getZ() + this.vectorChiPhuong.getZ() * t
         );
+    }
+
+    // nhieu nhat 4 diem
+    public List<ToaDo> giaoDiemVoiHinhHopChuNhat(HinhHopChuNhat hinhHopChuNhat) {
+        List<ToaDo> dsGiaoDiem = new ArrayList<ToaDo>();
+        ToaDo giaoDiem = null;
+
+        giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
+                .get(HinhHopChuNhat.MAT_DAY_DUOI_ABCD));
+        if (giaoDiem != null &&
+            new HinhChuNhat(
+                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_A),
+                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_B),
+                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_C),
+                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D)
+            ).chuaDiem(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem);
+
+        giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
+                .get(HinhHopChuNhat.MAT_DAY_TREN_EFGH));
+        if (giaoDiem != null &&
+                new HinhChuNhat(
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_E),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_F),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_G),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_H)
+                ).chuaDiem(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem);
+
+        giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
+                .get(HinhHopChuNhat.MAT_CDHG));
+        if (giaoDiem != null &&
+                new HinhChuNhat(
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_C),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_H),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_G)
+                ).chuaDiem(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem);
+
+        giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
+                .get(HinhHopChuNhat.MAT_ADHE));
+        if (giaoDiem != null &&
+                new HinhChuNhat(
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_A),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_H),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_E)
+                ).chuaDiem(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem);
+
+        giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
+                .get(HinhHopChuNhat.MAT_AEFB));
+        if (giaoDiem != null &&
+                new HinhChuNhat(
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_A),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_E),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_F),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_B)
+                ).chuaDiem(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem);
+
+        giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
+                .get(HinhHopChuNhat.MAT_BCGF));
+        if (giaoDiem != null &&
+                new HinhChuNhat(
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_B),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_C),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_G),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_F)
+                ).chuaDiem(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem);
+
+        return dsGiaoDiem;
     }
 
     public boolean chuaDiem(ToaDo toaDo) {

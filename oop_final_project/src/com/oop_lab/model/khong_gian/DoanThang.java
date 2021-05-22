@@ -1,5 +1,8 @@
 package com.oop_lab.model.khong_gian;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DoanThang {
     private ToaDo a;
     private ToaDo b;
@@ -16,6 +19,17 @@ public class DoanThang {
             return null;
 
         return giaoDiem;
+    }
+
+    public List<ToaDo> giaoDiemVoiHinhHopChuNhat(HinhHopChuNhat hinhHopChuNhat) {
+        List<ToaDo> dsGiaoDiem = new ArrayList<ToaDo>();
+        List<ToaDo> dsUngCuVien = this.toDuongThang().giaoDiemVoiHinhHopChuNhat(hinhHopChuNhat);
+
+        for (ToaDo giaoDiem : dsUngCuVien)
+            if (this.chuaDiem(giaoDiem))
+                dsGiaoDiem.add(giaoDiem);
+
+        return dsGiaoDiem;
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
