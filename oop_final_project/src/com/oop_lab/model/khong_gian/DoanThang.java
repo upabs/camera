@@ -25,19 +25,22 @@ public class DoanThang {
         List<ToaDo> dsGiaoDiem = new ArrayList<ToaDo>();
         List<ToaDo> dsUngCuVien = this.toDuongThang().giaoDiemVoiHinhHopChuNhat(hinhHopChuNhat);
 
-        for (ToaDo giaoDiem : dsUngCuVien)
-            if (this.chuaDiem(giaoDiem))
+        for (ToaDo giaoDiem : dsUngCuVien) {
+            if (this.chuaDiem(giaoDiem)) {
                 dsGiaoDiem.add(giaoDiem.clone());
+            }
+        }
 
         return dsGiaoDiem;
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
-        return (
-                this.toDuongThang().chuaDiem(toaDo) &&
-                !toaDo.equals(this.a) && !toaDo.equals(this.b) &&
-                this.doDai() == toaDo.khoangCach(this.a) + toaDo.khoangCach(this.b)
-        );
+        float doDai = (float) (Math.round(this.doDai() * 1000000.0) / 1000000.0);
+        float tongKhoangCach = (float) (Math.round((toaDo.khoangCach(this.a)
+                + toaDo.khoangCach(this.b)) * 1000000.0) / 1000000.0);
+
+        return (!toaDo.equals(this.a) && !toaDo.equals(this.b) &&
+                doDai == tongKhoangCach);
     }
 
     public DuongThang toDuongThang() {

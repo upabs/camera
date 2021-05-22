@@ -3,12 +3,14 @@ package com.oop_lab.service;
 import com.oop_lab.model.Camera;
 import com.oop_lab.model.DoVat;
 import com.oop_lab.model.Room;
+import com.oop_lab.model.graphic2d.RoomPicture;
 import com.oop_lab.model.khong_gian.DoanThang;
 import com.oop_lab.model.khong_gian.HinhChop;
 import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
 import com.oop_lab.model.khong_gian.Vector;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -297,10 +299,12 @@ public class RoomService {
                     toaDoDiemDangXet.tinhTien(stepAD.nhanFloat(j));
                     toaDoDiemDangXet.tinhTien(stepAE.nhanFloat(k));
                     
-                    if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet))
+                    if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet)) {
                         continue;
-                    if (this.diemNamTrongVungNhinDuoc(room, toaDoDiemDangXet))
+                    }
+                    if (this.diemNamTrongVungNhinDuoc(room, toaDoDiemDangXet)) {
                         soLuongDiemNhinThay += 1;
+                    }
 
                     soLuongDiemXetDuyet += 1;
                 }
@@ -349,10 +353,21 @@ public class RoomService {
     public List<Camera> danhSachCameraCoKhaNangNhinDuocDiem(Room room, ToaDo toaDo) {
         CameraService cameraService = new CameraService();
         List<Camera> result = new ArrayList<Camera>();
-
         for (Camera camera : room.getDanhSachCamera())
-            if (cameraService.diemNamTrongVungNhinDuocCuaCamera(camera, toaDo))
+            if (cameraService.diemNamTrongVungNhinDuocCuaCamera(camera, toaDo)) {
                 result.add(camera);
+            }
         return result;
+    }
+
+    public void showRoomPicture(Room room, int phongTo) {
+        if (room == null) return;
+
+        RoomPicture roomPicture = new RoomPicture(room, phongTo);
+        roomPicture.setVisible(true);
+    }
+
+    public void exportToImageFile(Room room, int phongTo, String fileName, String type) {
+        // TO DO
     }
 }
