@@ -27,7 +27,7 @@ public class RoomPicture extends JFrame {
         this.setContentPane(meow);
     }
     
-    public void Print(Room room, int phongTo) {
+    public void Print(Room room, int phongTo, String fileName, String type) {
         this.room = room;
         DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
         String svgNS = "http://www.w3.org/2000/svg";
@@ -35,11 +35,11 @@ public class RoomPicture extends JFrame {
         SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
         boolean useCSS = false; // we want to use CSS style attributes
 
-        String svgFile = "room.svg";
+        String File = fileName + "." + type;
         RoomDrawer test = new RoomDrawer(this.room, phongTo);
         test.paintComponent(svgGenerator);
         try {
-            OutputStream outputStream = new FileOutputStream(svgFile);
+            OutputStream outputStream = new FileOutputStream(File);
             Writer outputStreamWriter = new OutputStreamWriter(outputStream);
             svgGenerator.stream(outputStreamWriter, useCSS);
         } catch (Exception e1) {

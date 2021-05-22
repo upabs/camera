@@ -35,23 +35,13 @@ public class CameraService {
         ToaDo dinhD = camera.getVungNhin().getCacDinh().get(HinhChop.DINH_D);
         ToaDo tmp;
 
-        DoanThang EB = new DoanThang(dinhE, dinhB);
-        tmp = dinhE.diemGanNhat(EB.giaoDiemVoiHinhHopChuNhat(room));
-        ToaDo dinhB_ = tmp == null ? dinhB : tmp;
 
-        DoanThang ED = new DoanThang(dinhE, dinhD);
-        tmp = dinhE.diemGanNhat(ED.giaoDiemVoiHinhHopChuNhat(room));
-        ToaDo dinhD_ = tmp == null ? dinhD : tmp;
+        Vector vectorBD = new Vector(dinhB, dinhD);
+        float BD = dinhB.khoangCach(dinhD);
+        float k = BD / (100 - 1);
 
-        if (dinhB_ == null || dinhD_ == null)
-            return null;
-
-        Vector vectorB_D_ = new Vector(dinhB_, dinhD_);
-        float B_D_ = dinhB_.khoangCach(dinhD_);
-        float k = B_D_ / (40 - 1);
-
-        tmp = dinhB_.clone();
-        while (tmp.khoangCach(dinhB_) < B_D_) {
+        tmp = dinhB.clone();
+        while (tmp.khoangCach(dinhB) < BD) {
             DoanThang doanThang = new DoanThang(dinhE, tmp);
             List<ToaDo> cacUngCuVien = new ArrayList<ToaDo>();
             for (DoVat doVat : room.getDanhSachDoVat()) {
@@ -62,15 +52,21 @@ public class CameraService {
                 }
             }
             if (cacUngCuVien.isEmpty()) {
-                dsGiaoDiem.add(tmp.clone());
+                DoanThang doanEtmp = new DoanThang(dinhE, tmp);
+                ToaDo giaoVoiPhong = dinhE.diemGanNhat(doanEtmp.giaoDiemVoiHinhHopChuNhat(room));
+                if (giaoVoiPhong != null) {
+                    dsGiaoDiem.add(giaoVoiPhong.clone());
+                } else {
+                    dsGiaoDiem.add(tmp.clone());
+                }
             } else if (dinhE.diemGanNhat(cacUngCuVien) != null) {
                 dsGiaoDiem.add(dinhE.diemGanNhat(cacUngCuVien).clone());
             }
 
-            tmp.tinhTien(vectorB_D_.nhanFloat(k));
+            tmp.tinhTien(vectorBD.nhanFloat(k));
         }
-        // tranh sai so -> lam rieng voi D_
-        DoanThang doanThang = new DoanThang(dinhE, dinhD_);
+        // tranh sai so -> lam rieng voi D
+        DoanThang doanThang = new DoanThang(dinhE, dinhD);
         List<ToaDo> cacUngCuVien = new ArrayList<ToaDo>();
         for (DoVat doVat : room.getDanhSachDoVat()) {
             List<ToaDo> cacGiaoDiem = doanThang.giaoDiemVoiHinhHopChuNhat(doVat);
@@ -79,9 +75,15 @@ public class CameraService {
                 cacUngCuVien.add(ganNhat);
             }
         }
-        if (cacUngCuVien.isEmpty())
-            dsGiaoDiem.add(dinhD_.clone());
-        else if (dinhE.diemGanNhat(cacUngCuVien) != null) {
+        if (cacUngCuVien.isEmpty()) {
+            DoanThang doanED = new DoanThang(dinhE, dinhD);
+            ToaDo giaoVoiPhong = dinhE.diemGanNhat(doanED.giaoDiemVoiHinhHopChuNhat(room));
+            if (giaoVoiPhong != null) {
+                dsGiaoDiem.add(giaoVoiPhong.clone());
+            } else {
+                dsGiaoDiem.add(tmp.clone());
+            }
+        } else if (dinhE.diemGanNhat(cacUngCuVien) != null) {
             dsGiaoDiem.add(dinhE.diemGanNhat(cacUngCuVien).clone());
         }
 

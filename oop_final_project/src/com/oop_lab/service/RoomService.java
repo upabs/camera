@@ -302,11 +302,12 @@ public class RoomService {
         roomPicture.setVisible(true);
     }
     
-    public void SVG_export(Room room, int phongTo) {
+    public void exportToImageFile(Room room, int phongTo, String fileName, String type) {
+        // TO DO
+        
         if (room == null) return;
 
         RoomPicture roomPicture = new RoomPicture(room, phongTo);
-        roomPicture.Print(room, phongTo);
+        roomPicture.Print(room, phongTo, fileName, type);
     }
-    
 }

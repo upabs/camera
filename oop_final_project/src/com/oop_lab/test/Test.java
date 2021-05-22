@@ -54,6 +54,6 @@ public class Test {
 
 //        cameraService.toaDoChieuCameraLenOxy(camera1, room);
         //roomService.showRoomPicture(room, 150);
-        roomService.SVG_export(room, 150);
+        roomService.exportToImageFile(room, 150, "room", "svg");
     }
 }
