@@ -37,23 +37,31 @@ public class Test {
 
         DoVatService doVatService = new DoVatService();
         List<ToaDo> cacDinh = new ArrayList<ToaDo>();
-        cacDinh.add(new ToaDo(0.5f, 0.25f, 0));
+        cacDinh.add(new ToaDo(1f, 0.25f, 0));
         cacDinh.add(new ToaDo(1.5f, 0.25f, 0));
         cacDinh.add(new ToaDo(1.5f, 0.75f, 0));
-        cacDinh.add(new ToaDo(0.5f, 0.75f, 0));
-        cacDinh.add(new ToaDo(0.5f, 0.25f, 0.5f));
+        cacDinh.add(new ToaDo(1f, 0.75f, 0));
+        cacDinh.add(new ToaDo(1f, 0.25f, 0.5f));
         cacDinh.add(new ToaDo(1.5f, 0.25f, 0.5f));
         cacDinh.add(new ToaDo(1.5f, 0.75f, 0.5f));
-        cacDinh.add(new ToaDo(0.5f, 0.75f, 0.5f));
+        cacDinh.add(new ToaDo(1f, 0.75f, 0.5f));
 
         DoVat doVat = doVatService.createDoVat(cacDinh);
         roomService.themDoVat(room, doVat);
 
-//        float f = roomService.theTichVungNhinThay(room, 5, 5, 5);
-//        System.out.println(f);
+        List<ToaDo> cacDinh1 = new ArrayList<ToaDo>();
+        cacDinh1.add(new ToaDo(0.5f, 0.25f, 0));
+        cacDinh1.add(new ToaDo(0.75f, 0.25f, 0));
+        cacDinh1.add(new ToaDo(0.75f, 0.5f, 0));
+        cacDinh1.add(new ToaDo(0.5f, 0.5f, 0));
+        cacDinh1.add(new ToaDo(0.5f, 0.25f, 1));
+        cacDinh1.add(new ToaDo(0.75f, 0.25f, 1));
+        cacDinh1.add(new ToaDo(0.75f, 0.5f, 1));
+        cacDinh1.add(new ToaDo(0.5f, 0.5f, 1));
 
-//        cameraService.toaDoChieuCameraLenOxy(camera1, room);
+        DoVat doVat2 = doVatService.createDoVat(cacDinh1);
+        roomService.themDoVat(room, doVat2);
+
         roomService.showRoomPicture(room, 150);
-
     }
 }
