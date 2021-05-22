@@ -30,6 +30,12 @@ public class MatPhang {
         );
     }
 
+    public boolean chuaDuong(DuongThang duongThang) {
+        if (!this.chuaDiem(duongThang.getDiemThuoc()))
+            return false;
+        return this.vectorPhapTuyen.tichVoHuong(duongThang.getVectorChiPhuong()) == 0;
+    }
+
     public float giaTriHangSoD() {
         float A = this.vectorPhapTuyen.getX();
         float B = this.vectorPhapTuyen.getY();
