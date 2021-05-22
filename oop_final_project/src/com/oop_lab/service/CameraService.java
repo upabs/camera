@@ -1,8 +1,6 @@
 package com.oop_lab.service;
 
 import com.oop_lab.model.Camera;
-import com.oop_lab.model.khong_gian.HinhChop;
-import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
 
 public class CameraService {
