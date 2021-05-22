@@ -160,7 +160,7 @@ public class AppController {
 
         results.put(
                 "nhin duoc",
-                Math.round(theTichVungNhinThay/theTichCanPhong * 100.0) / 100.0 + "% can phong"
+                (Math.round(theTichVungNhinThay/theTichCanPhong * 100.0) / 100.0) * 100 + "% can phong"
         );
 
         this.view.showResult(results);

@@ -26,6 +26,7 @@ public class DoanThang {
         List<ToaDo> dsUngCuVien = this.toDuongThang().giaoDiemVoiHinhHopChuNhat(hinhHopChuNhat);
 
         for (ToaDo giaoDiem : dsUngCuVien) {
+            System.out.println("+" + giaoDiem);
             if (this.chuaDiem(giaoDiem)) {
                 dsGiaoDiem.add(giaoDiem.clone());
             }
@@ -35,9 +36,13 @@ public class DoanThang {
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
-        return (
-                !toaDo.equals(this.a) && !toaDo.equals(this.b) &&
-                this.doDai() == toaDo.khoangCach(this.a) + toaDo.khoangCach(this.b)
+        float doDai = (float) (Math.round(this.doDai() * 1000000.0) / 1000000.0);
+        float tongKhoangCach = (float) (Math.round((toaDo.khoangCach(this.a)
+                + toaDo.khoangCach(this.b)) * 1000000.0) / 1000000.0);
+
+        System.out.println(doDai + "==" + tongKhoangCach);
+        return (!toaDo.equals(this.a) && !toaDo.equals(this.b) &&
+                doDai == tongKhoangCach
         );
     }
 
