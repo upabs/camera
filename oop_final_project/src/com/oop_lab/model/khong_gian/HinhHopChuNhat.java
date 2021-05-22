@@ -99,6 +99,16 @@ public class HinhHopChuNhat {
                 + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_BCGF))) == this.chieuDai;
     }
 
+    public ToaDo tamDay() {
+        ToaDo A = this.cacDinh.get(DINH_A);
+        ToaDo D = this.cacDinh.get(DINH_D);
+        return new ToaDo(
+            (A.getX() + D.getX()) / 2,
+            (A.getY() + D.getY()) / 2,
+            (A.getZ() + D.getZ()) /2
+        );
+    }
+
     public List<MatPhang> getDanhSachCacMat() {
         return new ArrayList<MatPhang>(this.getCacMat().values());
     }

@@ -5,6 +5,7 @@ import com.oop_lab.model.DoVat;
 import com.oop_lab.model.Room;
 import com.oop_lab.model.khong_gian.DoanThang;
 import com.oop_lab.model.khong_gian.HinhChop;
+import com.oop_lab.model.khong_gian.HinhHopChuNhat;
 import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
 import com.oop_lab.model.khong_gian.Vector;
@@ -47,22 +48,50 @@ public class RoomService {
     }
 
     public boolean doVatNamTrongPhong(Room roomm, DoVat doVat) {
-        // TO DO
+
+        for (ToaDo dsDinh : doVat.getCacDinh().values()) {
+            if (!roomm.chuaDiem(dsDinh))    
+                return false;
+        }
         return true;
     }
 
     public boolean doVatKhongChamTran(Room room, DoVat doVat) {
-        // TO DO
-        return true;
+
+        ToaDo roomE = room.getCacDinh().get(HinhHopChuNhat.DINH_E);
+        ToaDo doVatE = doVat.getCacDinh().get(HinhHopChuNhat.DINH_E);
+        
+        return !(roomE.getZ() == doVatE.getZ());
+ 
     }
 
     public boolean doVatKhongBiVuong(Room room, DoVat doVat) {
         // TO DO
+        for (DoVat dsVat : room.getDanhSachDoVat()) {
+
+            // DoVat them vao` co' dinh nam` trong Vat khac
+            for (ToaDo dsDinh : doVat.getCacDinh().values()) {
+                if (dsVat.chuaDiem(dsDinh))
+                    return false;
+            }
+
+            // ton` tai doVat co' dinh nam` trong doVat them vao`
+            for (ToaDo dsDinh : dsVat.getCacDinh().values()) {
+                if (doVat.chuaDiem(dsDinh))
+                    return false;
+            }
+
+        }
         return true;
     }
 
     public boolean doVatNamTrenSanHoacTrenVatKhac(Room room, DoVat doVat) {
-        // TO DO
+
+        ToaDo tamDay_O = doVat.tamDay();
+
+        for (DoVat vat : room.getDanhSachDoVat()) {
+            if (vat.getCacMat().get(HinhHopChuNhat.MAT_DAY_TREN_EFGH).chuaDiem(tamDay_O)) return true;
+        }
         return true;
     }
 
@@ -152,6 +181,9 @@ public class RoomService {
 
     public MatPhang cameraNamTrenTuong(Room room, Camera camera) {
         for (MatPhang matPhang : room.getDanhSachCacMat()) {
+            if (matPhang.equals(room.getCacMat().get(HinhHopChuNhat.MAT_DAY_DUOI_ABCD))) continue;
+            if (matPhang.equals(room.getCacMat().get(HinhHopChuNhat.MAT_DAY_TREN_EFGH))) continue;
+            
             if (matPhang.chuaDiem(camera.getToaDo())) {
                 return matPhang;
             }
