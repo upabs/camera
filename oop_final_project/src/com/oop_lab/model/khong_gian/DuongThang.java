@@ -2,10 +2,10 @@ package com.oop_lab.model.khong_gian;
 
 public class DuongThang {
     private ToaDo diemThuoc;
-    private ToaDo vectorPhapTuyen;
-    private ToaDo vectorChiPhuong;
+    private Vector vectorPhapTuyen;
+    private Vector vectorChiPhuong;
 
-    public DuongThang(ToaDo diemThuoc, ToaDo vector, boolean chiPhuong) {
+    public DuongThang(ToaDo diemThuoc, Vector vector, boolean chiPhuong) {
         this.diemThuoc = diemThuoc;
         if (chiPhuong)
             this.vectorChiPhuong = vector;
@@ -51,9 +51,9 @@ public class DuongThang {
     }
 
     public boolean vuongGocVoiMatPhang(MatPhang matPhang) {
-        ToaDo tichCoHuong = this.vectorChiPhuong.tichCoHuong(matPhang.getVectorPhapTuyen());
+        Vector tichCoHuong = this.vectorChiPhuong.tichCoHuong(matPhang.getVectorPhapTuyen());
 
-        return tichCoHuong.equals(new ToaDo(0, 0, 0));
+        return tichCoHuong.equals(new Vector(0, 0, 0));
 
     }
 
@@ -78,19 +78,27 @@ public class DuongThang {
         this.diemThuoc = diemThuoc;
     }
 
-    public ToaDo getVectorPhapTuyen() {
+    public Vector getVectorPhapTuyen() {
         return vectorPhapTuyen;
     }
 
-    public void setVectorPhapTuyen(ToaDo vectorPhapTuyen) {
+    public void setVectorPhapTuyen(Vector vectorPhapTuyen) {
         this.vectorPhapTuyen = vectorPhapTuyen;
     }
 
-    public ToaDo getVectorChiPhuong() {
+    public Vector getVectorChiPhuong() {
         return vectorChiPhuong;
     }
 
-    public void setVectorChiPhuong(ToaDo vectorChiPhuong) {
+    public void setVectorChiPhuong(Vector vectorChiPhuong) {
         this.vectorChiPhuong = vectorChiPhuong;
+    }
+
+    @Override
+    public String toString() {
+        return "DuongThang: " + "\n\t" +
+                "x = " + this.diemThuoc.getX() + " + " + this.vectorChiPhuong.getX() + "t\n\t" + 
+                "y = " + this.diemThuoc.getY() + " + " + this.vectorChiPhuong.getY() + "t\n\t" +
+                "z = " + this.diemThuoc.getZ() + " + " + this.vectorChiPhuong.getZ() + "t\n\t";    
     }
 }

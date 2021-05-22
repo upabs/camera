@@ -11,6 +11,12 @@ public class ToaDo {
         this.z = z;
     }
 
+    public ToaDo(ToaDo p) {
+        this.x = p.getX();
+        this.y = p.getY();
+        this.z = p.getZ();
+    }
+
     public float khoangCach(ToaDo other) {
         if (other == null) return -1;
         return (float) (Math.sqrt(Math.pow(other.getX() - this.x, 2) +
@@ -18,14 +24,11 @@ public class ToaDo {
     }
 
     public float khoangCachToiDuongThang(DuongThang duongThang) {
-        ToaDo tmp = new ToaDo(
-                duongThang.getDiemThuoc().getX() - this.x,
-                duongThang.getDiemThuoc().getY() - this.y,
-                duongThang.getDiemThuoc().getZ() - this.z
-        );
+        // d = |AM ^ u| / |u|
+        Vector tmp = new Vector(this, duongThang.getDiemThuoc());
 
-        float m = tmp.tichCoHuong(duongThang.getVectorChiPhuong()).khoangCachToiGocToaDo();
-        float n = duongThang.getVectorChiPhuong().khoangCachToiGocToaDo();
+        float m = tmp.tichCoHuong(duongThang.getVectorChiPhuong()).doDai();
+        float n = duongThang.getVectorChiPhuong().doDai();
 
         return m / n;
     }
@@ -49,6 +52,12 @@ public class ToaDo {
         );
     }
 
+    public void tinhTien(Vector v) {
+        this.x += v.getX();
+        this.y += v.getY();
+        this.z += v.getZ();
+    }
+
     public float khoangCachDenMatPhang(MatPhang matPhang) {
         if (matPhang.chuaDiem(this))
             return 0;
@@ -56,17 +65,15 @@ public class ToaDo {
         return this.khoangCach(hinhChieu);
     }
 
-    public ToaDo tichCoHuong(ToaDo other) {
-        return new ToaDo(
-            other.getY() * this.z - other.getZ() * this.y,
-            other.getZ() * this.x - other.getX() * this.z,
-            other.getX() * this.y - other.getY() * this.x
-        );
-    }
-
     public float khoangCachToiGocToaDo() {
         return (float) (Math.sqrt(Math.pow(this.x, 2) +
                 Math.pow(this.y, 2) + Math.pow(this.z, 2)));
+    }
+
+    public void setTo(ToaDo p) {
+        this.x = p.getX();
+        this.y = p.getY();
+        this.z = p.getZ();
     }
 
     public float getX() {
@@ -103,10 +110,6 @@ public class ToaDo {
 
     @Override
     public String toString() {
-        return "ToaDo{" +
-                "x=" + x +
-                ", y=" + y +
-                ", z=" + z +
-                '}';
+        return "ToaDo(" + x + "; " + y + "; " + z + ')';
     }
 }

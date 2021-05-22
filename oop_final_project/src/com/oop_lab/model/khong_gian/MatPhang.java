@@ -1,26 +1,34 @@
 package com.oop_lab.model.khong_gian;
 
 public class MatPhang {
-    private ToaDo vectorPhapTuyen;
+    private Vector vectorPhapTuyen;
     private ToaDo diemThuoc;
 
-    private ToaDo[] capVectorChiPhuong = new ToaDo[2];
+    // private Vector[] capVectorChiPhuong = new Vector[2];
 
     public MatPhang() {
 
     }
 
-    public MatPhang(ToaDo vectorPhapTuyen, ToaDo diemThuoc) {
+    public MatPhang(Vector vectorPhapTuyen, ToaDo diemThuoc) {
         this.vectorPhapTuyen = vectorPhapTuyen;
         this.diemThuoc = diemThuoc;
     }
 
-    public MatPhang(ToaDo diemThuoc, ToaDo... capVectorChiPhuong) {
-        this.diemThuoc = diemThuoc;
-        this.capVectorChiPhuong[0] = capVectorChiPhuong[0];
-        this.capVectorChiPhuong[1] = capVectorChiPhuong[1];
-        this.vectorPhapTuyen = this.capVectorChiPhuong[0].tichCoHuong(this.capVectorChiPhuong[1]);
+    public MatPhang(ToaDo a, ToaDo b, ToaDo c) {
+        Vector ab = new Vector(a, b);
+        Vector ac = new Vector(a, c);
+
+        this.vectorPhapTuyen = ab.tichCoHuong(ac);
+        this.diemThuoc = a;
     }
+
+    // public MatPhang(ToaDo diemThuoc, Vector ...capVectorChiPhuong) {
+    //     this.diemThuoc = diemThuoc;
+    //     this.capVectorChiPhuong[0] = capVectorChiPhuong[0];
+    //     this.capVectorChiPhuong[1] = capVectorChiPhuong[1];
+    //     this.vectorPhapTuyen = this.capVectorChiPhuong[0].tichCoHuong(this.capVectorChiPhuong[1]);
+    // }
 
     public boolean chuaDiem(ToaDo toaDo) {
         return (
@@ -39,11 +47,11 @@ public class MatPhang {
         return - (A * this.diemThuoc.getX() + B * this.diemThuoc.getY() + C * this.diemThuoc.getZ());
     }
 
-    public ToaDo getVectorPhapTuyen() {
+    public Vector getVectorPhapTuyen() {
         return vectorPhapTuyen;
     }
 
-    public void setVectorPhapTuyen(ToaDo vectorPhapTuyen) {
+    public void setVectorPhapTuyen(Vector vectorPhapTuyen) {
         this.vectorPhapTuyen = vectorPhapTuyen;
     }
 
@@ -55,23 +63,35 @@ public class MatPhang {
         this.diemThuoc = diemThuoc;
     }
 
-    public ToaDo[] getCapVectorChiPhuong() {
-        return capVectorChiPhuong;
-    }
+    // public Vector[] getCapVectorChiPhuong() {
+    //     return capVectorChiPhuong;
+    // }
 
-    public void setCapVectorChiPhuong(ToaDo[] capVectorChiPhuong) {
-        this.capVectorChiPhuong = capVectorChiPhuong;
-    }
+    // public void setCapVectorChiPhuong(Vector[] capVectorChiPhuong) {
+    //     this.capVectorChiPhuong = capVectorChiPhuong;
+    // }
 
     @Override
     public boolean equals(Object obj) {
         MatPhang other = (MatPhang) obj;
-        ToaDo tichCoHuong = this.vectorPhapTuyen.tichCoHuong(other.getVectorPhapTuyen());
+        Vector tichCoHuong = this.vectorPhapTuyen.tichCoHuong(other.getVectorPhapTuyen());
         return (
             other.chuaDiem(this.diemThuoc) &&
             tichCoHuong.getX() == 0 &&
             tichCoHuong.getY() == 0 &&
             tichCoHuong.getZ() == 0
         );
+    }
+
+    @Override
+    public String toString() {
+        // phapTuyen: n = (a, b, c)
+        float a = this.vectorPhapTuyen.getX();
+        float b = this.vectorPhapTuyen.getY();
+        float c = this.vectorPhapTuyen.getZ();
+
+        // ax + by + cz + d = 0
+        return "MatPhang: " + a + "x + " + b + "y + " + c + "z + " +
+                this.giaTriHangSoD() + " = 0";
     }
 }
