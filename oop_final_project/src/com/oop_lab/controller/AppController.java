@@ -41,7 +41,7 @@ public class AppController {
 
         while (this.app.isRunning()) {
             int userOption = this.view.menu(this.app.getName(),
-                        "read file input", "show result", "exit");
+                        "read file input", "show result", "export image", "exit");
             switch (userOption) {
                 case 1:
                     this.readDataFromInputFile();
@@ -50,6 +50,9 @@ public class AppController {
                     this.showResult();
                     break;
                 case 3:
+                    this.exportRoomImage();
+                    break;
+                case 4:
                     this.view.notice("message", "goodbye");
                     this.app.setRunning(false);
                     break;
@@ -164,6 +167,11 @@ public class AppController {
         );
 
         this.view.showResult(results);
+        this.roomService.showRoomPicture(this.app.getRoom(), 150);
+    }
+
+    public void exportRoomImage() {
+        this.roomService.exportToImageFile(this.app.getRoom(), 150,"room", "png");
     }
 
     public Room createRoom(float chieuCao, float chieuRong, float chieuDai) {

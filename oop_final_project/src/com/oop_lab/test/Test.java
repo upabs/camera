@@ -62,11 +62,6 @@ public class Test {
         DoVat doVat2 = doVatService.createDoVat(cacDinh1);
         roomService.themDoVat(room, doVat2);
 
-//        float f = roomService.theTichVungNhinThay(room, 5, 5, 5);
-//        System.out.println(f);
-
-//        cameraService.toaDoChieuCameraLenOxy(camera1, room);
         roomService.showRoomPicture(room, 150);
-
     }
 }
