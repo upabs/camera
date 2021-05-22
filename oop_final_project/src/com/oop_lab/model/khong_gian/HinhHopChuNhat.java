@@ -155,4 +155,5 @@ public class HinhHopChuNhat {
     public void setChieuRong(float chieuRong) {
         this.chieuRong = chieuRong;
     }
+
 }

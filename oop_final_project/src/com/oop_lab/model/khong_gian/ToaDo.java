@@ -5,6 +5,9 @@ public class ToaDo {
     private float y;
     private float z;
 
+    public ToaDo(){
+
+    }
     public ToaDo(float x, float y, float z) {
         this.x = x;
         this.y = y;
@@ -67,6 +70,21 @@ public class ToaDo {
     public float khoangCachToiGocToaDo() {
         return (float) (Math.sqrt(Math.pow(this.x, 2) +
                 Math.pow(this.y, 2) + Math.pow(this.z, 2)));
+    }
+///////////////////////////////
+    public static ToaDo vector(ToaDo a, ToaDo b) {
+        // vector ab;
+        ToaDo x = new ToaDo();
+        x.setX(b.getX() - a.getX());
+        x.setY(b.getY() - a.getY());
+        x.setZ(b.getZ() - a.getZ());
+        return x;
+    }
+    public float tichVoHuong(ToaDo other) {
+        return this.x*other.getX() + this.y*other.getY() + this.z*other.getZ();
+    }
+    public float doDaiVector() {
+        return (float) Math.sqrt(this.x*this.x + this.y*this.y +this.z*this.z);
     }
 
     public float getX() {

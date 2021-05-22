@@ -3,10 +3,7 @@ package com.oop_lab.service;
 import com.oop_lab.model.Camera;
 import com.oop_lab.model.DoVat;
 import com.oop_lab.model.Room;
-import com.oop_lab.model.khong_gian.DoanThang;
-import com.oop_lab.model.khong_gian.HinhChop;
-import com.oop_lab.model.khong_gian.MatPhang;
-import com.oop_lab.model.khong_gian.ToaDo;
+import com.oop_lab.model.khong_gian.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +25,37 @@ public class RoomService {
 
     public boolean roomLaHinhHopChuNhat(List<ToaDo> danhSachCacDinh) {
         // TO DO
+        List<ToaDo> matTren = new ArrayList<>();
+        matTren.add(danhSachCacDinh.get(0));
+        matTren.add(danhSachCacDinh.get(1));
+        matTren.add(danhSachCacDinh.get(2));
+        matTren.add(danhSachCacDinh.get(3));
+
+        List<ToaDo> matDuoi = new ArrayList<>();
+        matDuoi.add(danhSachCacDinh.get(4));
+        matDuoi.add(danhSachCacDinh.get(5));
+        matDuoi.add(danhSachCacDinh.get(6));
+        matDuoi.add(danhSachCacDinh.get(7));
+
+        if(!MatPhang.laHCN(matTren) && !MatPhang.laHCN(matDuoi))
+        {
+            return false;
+        }
+        ToaDo AB = new ToaDo();
+        AB = ToaDo.vector(danhSachCacDinh.get(0),danhSachCacDinh.get(1));
+        ToaDo EF = new ToaDo();
+        EF = ToaDo.vector(danhSachCacDinh.get(4),danhSachCacDinh.get(5));
+        if(AB.doDaiVector() != EF.doDaiVector()) return false;
+
+        ToaDo AD = new ToaDo();
+        AD = ToaDo.vector(danhSachCacDinh.get(0),danhSachCacDinh.get(3));
+        ToaDo EH = new ToaDo();
+        EH = ToaDo.vector(danhSachCacDinh.get(4),danhSachCacDinh.get(7));
+        if(AD.doDaiVector() != EH.doDaiVector()) return false;
+
+        ToaDo AE = new ToaDo();
+        AE = ToaDo.vector(danhSachCacDinh.get(0),danhSachCacDinh.get(4));
+        if(AE.tichVoHuong(EF) != 0) return false;
         return true;
     }
 

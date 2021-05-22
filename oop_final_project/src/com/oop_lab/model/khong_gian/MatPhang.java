@@ -1,5 +1,7 @@
 package com.oop_lab.model.khong_gian;
 
+import java.util.List;
+
 public class MatPhang {
     private ToaDo vectorPhapTuyen;
     private ToaDo diemThuoc;
@@ -62,7 +64,37 @@ public class MatPhang {
     public void setCapVectorChiPhuong(ToaDo[] capVectorChiPhuong) {
         this.capVectorChiPhuong = capVectorChiPhuong;
     }
+//////////////////////////////////
+//    public static  Tugiac(List<ToaDo> toaDoList)
+//    {
+//
+//    }
+    public static boolean laHCN(List<ToaDo> toaDoList)
+    {
+        //ABCD
+        int check = 0;
+        ToaDo AB = new ToaDo();
+        AB = ToaDo.vector(toaDoList.get(0),toaDoList.get(1));
+        ToaDo DC = new ToaDo();
+        DC = ToaDo.vector(toaDoList.get(3),toaDoList.get(2));
+        if(AB.tichCoHuong(DC).equals(new ToaDo(0,0,0)) && (AB.doDaiVector() == DC.doDaiVector()))
+        {
+            check ++;
+        }
+        ToaDo AD = new ToaDo();
+        AD = ToaDo.vector(toaDoList.get(0),toaDoList.get(3));
+        if(AB.tichVoHuong(AD) == 0)
+        {
+            check++;
+        }
+        if(check == 2){
+            return true;
+        }
+        else{
+            return false;
+        }
 
+    }
     @Override
     public boolean equals(Object obj) {
         MatPhang other = (MatPhang) obj;
