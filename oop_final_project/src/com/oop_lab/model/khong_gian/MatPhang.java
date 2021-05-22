@@ -4,8 +4,6 @@ public class MatPhang {
     private Vector vectorPhapTuyen;
     private ToaDo diemThuoc;
 
-    // private Vector[] capVectorChiPhuong = new Vector[2];
-
     public MatPhang() {
 
     }
@@ -22,13 +20,6 @@ public class MatPhang {
         this.vectorPhapTuyen = ab.tichCoHuong(ac);
         this.diemThuoc = a;
     }
-
-    // public MatPhang(ToaDo diemThuoc, Vector ...capVectorChiPhuong) {
-    //     this.diemThuoc = diemThuoc;
-    //     this.capVectorChiPhuong[0] = capVectorChiPhuong[0];
-    //     this.capVectorChiPhuong[1] = capVectorChiPhuong[1];
-    //     this.vectorPhapTuyen = this.capVectorChiPhuong[0].tichCoHuong(this.capVectorChiPhuong[1]);
-    // }
 
     public boolean chuaDiem(ToaDo toaDo) {
         return (
@@ -63,23 +54,13 @@ public class MatPhang {
         this.diemThuoc = diemThuoc;
     }
 
-    // public Vector[] getCapVectorChiPhuong() {
-    //     return capVectorChiPhuong;
-    // }
-
-    // public void setCapVectorChiPhuong(Vector[] capVectorChiPhuong) {
-    //     this.capVectorChiPhuong = capVectorChiPhuong;
-    // }
-
     @Override
     public boolean equals(Object obj) {
         MatPhang other = (MatPhang) obj;
         Vector tichCoHuong = this.vectorPhapTuyen.tichCoHuong(other.getVectorPhapTuyen());
         return (
             other.chuaDiem(this.diemThuoc) &&
-            tichCoHuong.getX() == 0 &&
-            tichCoHuong.getY() == 0 &&
-            tichCoHuong.getZ() == 0
+            tichCoHuong.equals(new Vector(0, 0, 0))
         );
     }
 

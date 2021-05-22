@@ -42,12 +42,13 @@ public class DuongThang {
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
-        float N = (toaDo.getX() - this.diemThuoc.getX()) / this.vectorChiPhuong.getX();
+        if (toaDo.equals(this.diemThuoc))
+            return true;
 
-        return (
-                ((toaDo.getY() - this.diemThuoc.getY()) / this.vectorChiPhuong.getY()) == N &&
-                ((toaDo.getZ() - this.diemThuoc.getZ()) / this.vectorChiPhuong.getZ()) == N
-        );
+        Vector vector = new Vector(this.diemThuoc, toaDo);
+
+        return vector.tichCoHuong(this.vectorChiPhuong)
+                .equals(new Vector(0, 0, 0));
     }
 
     public boolean vuongGocVoiMatPhang(MatPhang matPhang) {

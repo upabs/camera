@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class HinhHopChuNhat {
 
-    public static final String MAT_DAY_DUOI_ABCD = "ABDC";
+    public static final String MAT_DAY_DUOI_ABCD = "ABCD";
     public static final String MAT_DAY_TREN_EFGH = "EFGH";
     public static final String MAT_AEFB = "AEFB";
     public static final String MAT_ADHE = "ADHE";

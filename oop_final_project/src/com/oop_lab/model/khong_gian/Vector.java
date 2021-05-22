@@ -39,12 +39,6 @@ public class Vector {
         this.z += v.getZ();
     }
 
-    // public void nhanFloat(float f) {
-    //     this.x *= f;
-    //     this.y *= f;
-    //     this.z *= f;
-    // }
-
     public Vector nhanFloat(float f) {
         return new Vector(
             this.x * f, 
@@ -69,6 +63,10 @@ public class Vector {
         this.x = v.getX();
         this.y = v.getY();
         this.z = v.getZ();
+    }
+
+    public Vector clone() {
+        return new Vector(this.x, this.y, this.z);
     }
 
     public float getX() {

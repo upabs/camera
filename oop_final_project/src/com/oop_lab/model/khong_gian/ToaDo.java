@@ -76,6 +76,10 @@ public class ToaDo {
         this.z = p.getZ();
     }
 
+    public ToaDo clone() {
+        return new ToaDo(this.x, this.y, this.z);
+    }
+
     public float getX() {
         return x;
     }

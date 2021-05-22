@@ -10,10 +10,7 @@ public class DoanThang {
     }
 
     public ToaDo giaoDiemVoiMatPhang(MatPhang matPhang) {
-        DuongThang duongThang = new DuongThang (
-                a, new Vector(a, b), true);
-
-        ToaDo giaoDiem = duongThang.giaoDiemVoiMatPhang(matPhang);
+        ToaDo giaoDiem = this.toDuongThang().giaoDiemVoiMatPhang(matPhang);
 
         if (giaoDiem == null || !this.chuaDiem(giaoDiem))
             return null;
@@ -22,14 +19,15 @@ public class DoanThang {
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
-        DuongThang duongThang = new DuongThang(
-                a, new Vector(a, b), true);
-
         return (
-                duongThang.chuaDiem(toaDo) &&
+                this.toDuongThang().chuaDiem(toaDo) &&
                 !toaDo.equals(this.a) && !toaDo.equals(this.b) &&
                 this.doDai() == toaDo.khoangCach(this.a) + toaDo.khoangCach(this.b)
         );
+    }
+
+    public DuongThang toDuongThang() {
+        return new DuongThang(this.a, new Vector(this.a, this.b), true);
     }
 
     public float doDai() {
