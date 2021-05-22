@@ -52,12 +52,12 @@ public class DuongThang {
         giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
                 .get(HinhHopChuNhat.MAT_DAY_DUOI_ABCD));
         if (giaoDiem != null &&
-            new HinhChuNhat(
-                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_A),
-                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_B),
-                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_C),
-                hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D)
-            ).chuaDiem(giaoDiem)
+                new HinhChuNhat(
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_A),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_B),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_C),
+                        hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D)
+                ).chuaDiem(giaoDiem)
         ) dsGiaoDiem.add(giaoDiem.clone());
 
         giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
@@ -114,7 +114,6 @@ public class DuongThang {
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_F)
                 ).chuaDiem(giaoDiem) && !dsGiaoDiem.contains(giaoDiem)
         ) dsGiaoDiem.add(giaoDiem.clone());
-
         return dsGiaoDiem;
     }
 

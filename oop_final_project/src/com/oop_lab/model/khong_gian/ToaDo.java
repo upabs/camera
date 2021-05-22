@@ -1,5 +1,7 @@
 package com.oop_lab.model.khong_gian;
 
+import java.util.List;
+
 public class ToaDo {
     private float x;
     private float y;
@@ -78,6 +80,31 @@ public class ToaDo {
 
     public ToaDo clone() {
         return new ToaDo(this.x, this.y, this.z);
+    }
+
+    public ToaDo diemGanNhat(List<ToaDo> danhSachCacDiem) {
+        // dung cho cac truong hop cac dinh thang hang
+        if (danhSachCacDiem.isEmpty()) {
+            return null;
+        }
+        ToaDo diemGanNhat = null;
+        float khoangCachMin = 9999;
+
+        for (ToaDo toaDo : danhSachCacDiem) {
+            float kc = this.khoangCach(toaDo);
+            if (kc < khoangCachMin && kc != 0) {
+                diemGanNhat = toaDo;
+                khoangCachMin = kc;
+            }
+        }
+
+        return diemGanNhat;
+    }
+
+    public boolean namTrenDoanThang(DoanThang doanThang) {
+        if (this.equals(doanThang.getA()) || this.equals(doanThang.getB()))
+            return true;
+        return doanThang.chuaDiem(this);
     }
 
     public float getX() {
