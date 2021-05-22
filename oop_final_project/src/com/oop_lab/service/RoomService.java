@@ -95,7 +95,7 @@ public class RoomService {
                 if (dsVat.chuaDiem(dsDinh))
                     return false;
             }
-            
+
             // ton` tai doVat co' dinh nam` trong doVat them vao`
             for (ToaDo dsDinh : dsVat.getCacDinh().values()) {
                 if (doVat.chuaDiem(dsDinh))
@@ -110,10 +110,10 @@ public class RoomService {
         ToaDo doVat_dinhA = doVat.getCacDinh().get(DoVat.DINH_A);
         MatPhang room_dayDuoi = room.getCacMat().get(Room.MAT_DAY_DUOI_ABCD);
 
-        if (!room_dayDuoi.chuaDiem(doVat_dinhA)) {
-            return false;
+        if (room_dayDuoi.chuaDiem(doVat_dinhA)) {
+            return true;
         }
-
+        
         for (DoVat dsVat : room.getDanhSachDoVat()) {
             MatPhang dsVat_dayTren = dsVat.getCacMat().get(DoVat.MAT_DAY_TREN_EFGH);
 
