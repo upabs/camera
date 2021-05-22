@@ -9,7 +9,9 @@ import com.oop_lab.service.DoVatService;
 import com.oop_lab.service.RoomService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Test {
     public static void main(String[] args) {
@@ -27,9 +29,11 @@ public class Test {
 
         Room room = roomService.createRoom(dsDinh);
         CameraService cameraService = new CameraService();
-        Camera camera = cameraService.createCamera(new ToaDo(0f, 0.5f, 0.5f), 90, 90);
+        Camera camera1 = cameraService.createCamera(new ToaDo(1, 1, 0.5f), 90, 90);
+        Camera camera2 = cameraService.createCamera(new ToaDo(0, 0.5f, 0.5f), 90, 90);
 
-        roomService.themCamera(room, camera);
+        roomService.themCamera(room, camera1);
+        roomService.themCamera(room, camera2);
 
         DoVatService doVatService = new DoVatService();
         List<ToaDo> cacDinh = new ArrayList<ToaDo>();
@@ -47,5 +51,6 @@ public class Test {
 
         float f = roomService.theTichVungNhinThay(room, 200, 200, 100);
         System.out.println(f);
+
     }
 }

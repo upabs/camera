@@ -58,7 +58,7 @@ public class DuongThang {
                 hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_C),
                 hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D)
             ).chuaDiem(giaoDiem)
-        ) dsGiaoDiem.add(giaoDiem);
+        ) dsGiaoDiem.add(giaoDiem.clone());
 
         giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
                 .get(HinhHopChuNhat.MAT_DAY_TREN_EFGH));
@@ -68,8 +68,8 @@ public class DuongThang {
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_F),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_G),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_H)
-                ).chuaDiem(giaoDiem)
-        ) dsGiaoDiem.add(giaoDiem);
+                ).chuaDiem(giaoDiem) && !dsGiaoDiem.contains(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem.clone());
 
         giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
                 .get(HinhHopChuNhat.MAT_CDHG));
@@ -79,8 +79,8 @@ public class DuongThang {
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_H),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_G)
-                ).chuaDiem(giaoDiem)
-        ) dsGiaoDiem.add(giaoDiem);
+                ).chuaDiem(giaoDiem) && !dsGiaoDiem.contains(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem.clone());
 
         giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
                 .get(HinhHopChuNhat.MAT_ADHE));
@@ -90,8 +90,8 @@ public class DuongThang {
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_D),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_H),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_E)
-                ).chuaDiem(giaoDiem)
-        ) dsGiaoDiem.add(giaoDiem);
+                ).chuaDiem(giaoDiem) && !dsGiaoDiem.contains(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem.clone());
 
         giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
                 .get(HinhHopChuNhat.MAT_AEFB));
@@ -101,8 +101,8 @@ public class DuongThang {
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_E),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_F),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_B)
-                ).chuaDiem(giaoDiem)
-        ) dsGiaoDiem.add(giaoDiem);
+                ).chuaDiem(giaoDiem) && !dsGiaoDiem.contains(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem.clone());
 
         giaoDiem = this.giaoDiemVoiMatPhang(hinhHopChuNhat.getCacMat()
                 .get(HinhHopChuNhat.MAT_BCGF));
@@ -112,8 +112,8 @@ public class DuongThang {
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_C),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_G),
                         hinhHopChuNhat.getCacDinh().get(HinhHopChuNhat.DINH_F)
-                ).chuaDiem(giaoDiem)
-        ) dsGiaoDiem.add(giaoDiem);
+                ).chuaDiem(giaoDiem) && !dsGiaoDiem.contains(giaoDiem)
+        ) dsGiaoDiem.add(giaoDiem.clone());
 
         return dsGiaoDiem;
     }

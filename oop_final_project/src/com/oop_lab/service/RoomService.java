@@ -269,14 +269,10 @@ public class RoomService {
             boolean stop = false;
             int i;
             for (i = 0; i < dsDoVat.size(); i++) {
-                for (MatPhang matPhang : dsDoVat.get(i).getDanhSachCacMat()) {
-                    ToaDo giaoDiem = doanThangNoiCameraVoiDiem.giaoDiemVoiMatPhang(matPhang);
-                    if (giaoDiem != null) {
-                        stop = true;
-                        break;
-                    }
+                if (!doanThangNoiCameraVoiDiem
+                        .giaoDiemVoiHinhHopChuNhat(dsDoVat.get(i)).isEmpty()) {
+                    break;
                 }
-                if (stop) break;
             }
             if (i == dsDoVat.size()) {
                 return true;

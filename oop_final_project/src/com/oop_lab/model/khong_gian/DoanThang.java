@@ -27,7 +27,7 @@ public class DoanThang {
 
         for (ToaDo giaoDiem : dsUngCuVien)
             if (this.chuaDiem(giaoDiem))
-                dsGiaoDiem.add(giaoDiem);
+                dsGiaoDiem.add(giaoDiem.clone());
 
         return dsGiaoDiem;
     }
