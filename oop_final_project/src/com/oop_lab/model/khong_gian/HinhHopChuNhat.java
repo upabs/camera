@@ -85,14 +85,15 @@ public class HinhHopChuNhat {
     }
 
     public boolean chuaDiem(ToaDo toaDo) {
-        for (MatPhang matPhang : this.getDanhSachCacMat())
-            if (matPhang.chuaDiem(toaDo))
-                return false;
+        // for (MatPhang matPhang : this.getDanhSachCacMat())
+        //     if (matPhang.chuaDiem(toaDo))
+        //         return false;
 
         if ((toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_DAY_DUOI_ABCD))
             + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_DAY_TREN_EFGH)))
                 != this.chieuCao
         ) return false;
+
         if ((toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_CDHG))
                 + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_AEFB)))
                 != this.chieuRong

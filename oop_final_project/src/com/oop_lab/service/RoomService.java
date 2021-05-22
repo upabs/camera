@@ -41,13 +41,13 @@ public class RoomService {
         Vector HG = new Vector(dsCacDinh.get(H), dsCacDinh.get(G));
 
         Vector AE = new Vector(dsCacDinh.get(A), dsCacDinh.get(E));
-        Vector DH = new Vector(dsCacDinh.get(D), dsCacDinh.get(H));
+        Vector CG = new Vector(dsCacDinh.get(C), dsCacDinh.get(G));
         
         Vector AD = new Vector(dsCacDinh.get(A), dsCacDinh.get(D));
 
         if (!AB.equals(DC))     return false;   // ABCD <> hbh
         if (!EF.equals(HG))     return false;   // EFGH <> hbh
-        if (!AE.equals(DH))     return false;   // AEDH <> hbh
+        if (!AE.equals(CG))     return false;   // AEDH <> hbh
     
         // AB ⊥ AD ⊥ AE
         if (AB.tichVoHuong(AD) != 0)    return false;
@@ -73,15 +73,10 @@ public class RoomService {
 
     public boolean doVatNamTrongPhong(Room room, DoVat doVat) {
         // TO DO
-        return (room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_A))
-                && room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_B))
-                && room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_C))
-                && room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_D))
-                && room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_E))
-                && room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_F))
-                && room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_G))
-                && room.chuaDiem(doVat.getCacDinh().get(DoVat.DINH_H))
-        );
+        for (ToaDo p : doVat.getCacDinh().values()) {
+            if (!room.chuaDiem(p))  return false;
+        }
+        return true;
     }
 
     public boolean doVatKhongChamTran(Room room, DoVat doVat) {
@@ -94,21 +89,18 @@ public class RoomService {
 
     public boolean doVatKhongBiVuong(Room room, DoVat doVat) {
         
-//        List<DoVat> doVats =  room.getDanhSachDoVat();
         for (DoVat dsVat : room.getDanhSachDoVat()) {
-
             // DoVat them vao` co' dinh nam` trong Vat khac
             for (ToaDo dsDinh : doVat.getCacDinh().values()) {
                 if (dsVat.chuaDiem(dsDinh))
                     return false;
             }
-
+            
             // ton` tai doVat co' dinh nam` trong doVat them vao`
             for (ToaDo dsDinh : dsVat.getCacDinh().values()) {
                 if (doVat.chuaDiem(dsDinh))
                     return false;
             }
-
         }
         return true;
     }
@@ -128,7 +120,6 @@ public class RoomService {
             if (!dsVat_dayTren.chuaDiem(doVat_dinhA))
                 return false;
         }
-
         return true;
     }
 
