@@ -301,4 +301,12 @@ public class RoomService {
         RoomPicture roomPicture = new RoomPicture(room, phongTo);
         roomPicture.setVisible(true);
     }
+    
+    public void SVG_export(Room room, int phongTo) {
+        if (room == null) return;
+
+        RoomPicture roomPicture = new RoomPicture(room, phongTo);
+        roomPicture.Print(room, phongTo);
+    }
+    
 }

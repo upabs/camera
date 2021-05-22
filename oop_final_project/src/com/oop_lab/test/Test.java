@@ -53,7 +53,7 @@ public class Test {
 //        System.out.println(f);
 
 //        cameraService.toaDoChieuCameraLenOxy(camera1, room);
-        roomService.showRoomPicture(room, 150);
-
+        //roomService.showRoomPicture(room, 150);
+        roomService.SVG_export(room, 150);
     }
 }

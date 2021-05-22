@@ -64,7 +64,6 @@ public class RoomDrawer extends JPanel {
                 ));
             }
         }
-
     }
 
     public Room getRoom() {
