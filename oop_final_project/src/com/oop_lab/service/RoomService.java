@@ -10,7 +10,6 @@ import com.oop_lab.model.khong_gian.MatPhang;
 import com.oop_lab.model.khong_gian.ToaDo;
 import com.oop_lab.model.khong_gian.Vector;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -302,8 +301,13 @@ public class RoomService {
         RoomPicture roomPicture = new RoomPicture(room, phongTo);
         roomPicture.setVisible(true);
     }
-
+    
     public void exportToImageFile(Room room, int phongTo, String fileName, String type) {
         // TO DO
+        
+        if (room == null) return;
+
+        RoomPicture roomPicture = new RoomPicture(room, phongTo);
+        roomPicture.Print(room, phongTo, fileName, type);
     }
 }

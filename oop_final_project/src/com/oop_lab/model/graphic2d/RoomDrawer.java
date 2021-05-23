@@ -7,13 +7,10 @@ import com.oop_lab.model.khong_gian.HinhHopChuNhat;
 import com.oop_lab.model.khong_gian.ToaDo;
 import com.oop_lab.service.CameraService;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.List;
 
 public class RoomDrawer extends JPanel {
@@ -67,7 +64,6 @@ public class RoomDrawer extends JPanel {
                 ));
             }
         }
-
     }
 
     public Room getRoom() {
