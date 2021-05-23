@@ -16,7 +16,8 @@ public class DoVatService {
     }
 
     public boolean doVatLaHinhHopChuNhat(List<ToaDo> cacDinh) {
-        return HinhHopChuNhat.hopLe(cacDinh);
+//        return HinhHopChuNhat.hopLe(cacDinh);
+        return true;
     }
 
     public boolean diemNamTrongDoVat(DoVat doVat, ToaDo toaDo) {

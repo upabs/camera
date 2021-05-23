@@ -16,8 +16,8 @@ public class Main {
                 app, new AppView(),
                 new CameraService(),
                 new DoVatService(),
-                new RoomService());
-
+                new RoomService()
+        );
         controller.runApp();
     }
 }

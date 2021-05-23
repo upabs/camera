@@ -6,7 +6,7 @@ import com.oop_lab.model.khong_gian.ToaDo;
 public class Camera {
 
     private ToaDo toaDo;
-    private float tamNhin = 1;
+    private float tamNhin = 2;
     private float gocCao;
     private float gocRong;
     private HinhChop vungNhin;
