@@ -16,6 +16,22 @@ public class HinhChuNhat {
         this.matPhang = new MatPhang(dinhA, dinhB, dinhC);
     }
 
+    public static boolean hopLe(
+            ToaDo dinhA, ToaDo dinhB,
+            ToaDo dinhC, ToaDo dinhD
+    ) {
+        Vector vectorAB = new Vector(dinhA, dinhB);
+        Vector vectorAD = new Vector(dinhA, dinhD);
+        Vector vectorBC = new Vector(dinhB, dinhC);
+        Vector vectorCD = new Vector(dinhC, dinhD);
+
+        return (
+            vectorAB.tichVoHuong(vectorAD) == 0 &&
+            vectorAB.tichVoHuong(vectorBC) == 0 &&
+            vectorBC.tichVoHuong(vectorCD) == 0
+        );
+    }
+
     public boolean chuaDiem(ToaDo toaDo) {
         if (!this.matPhang.chuaDiem(toaDo))
             return false;

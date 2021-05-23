@@ -3,12 +3,9 @@ package com.oop_lab.service;
 import com.oop_lab.model.Camera;
 import com.oop_lab.model.DoVat;
 import com.oop_lab.model.Room;
+import com.oop_lab.model.graphic2d.RoomDrawer;
 import com.oop_lab.model.graphic2d.RoomPicture;
-import com.oop_lab.model.khong_gian.DoanThang;
-import com.oop_lab.model.khong_gian.HinhChop;
-import com.oop_lab.model.khong_gian.MatPhang;
-import com.oop_lab.model.khong_gian.ToaDo;
-import com.oop_lab.model.khong_gian.Vector;
+import com.oop_lab.model.khong_gian.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +26,7 @@ public class RoomService {
     }
 
     public boolean roomLaHinhHopChuNhat(List<ToaDo> danhSachCacDinh) {
-        // TO DO
-        return true;
+        return HinhHopChuNhat.hopLe(danhSachCacDinh);
     }
 
     public boolean roomHopLe(float cao, float rong, float dai) {
@@ -47,14 +43,30 @@ public class RoomService {
         return true;
     }
 
-    public boolean doVatNamTrongPhong(Room roomm, DoVat doVat) {
-        // TO DO
+    public boolean doVatNamTrongPhong(Room room, DoVat doVat) {
+        for (ToaDo toaDo : doVat.getCacDinh().values()) {
+            if (toaDo.khoangCachDenMatPhang(room.getCacMat().get(HinhHopChuNhat.MAT_DAY_TREN_EFGH))
+                + toaDo.khoangCachDenMatPhang(room.getCacMat().get(HinhHopChuNhat.MAT_DAY_DUOI_ABCD))
+                    != room.getChieuCao()
+            ) return false;
+            if (toaDo.khoangCachDenMatPhang(room.getCacMat().get(HinhHopChuNhat.MAT_AEFB))
+                + toaDo.khoangCachDenMatPhang(room.getCacMat().get(HinhHopChuNhat.MAT_CDHG))
+                    != room.getChieuRong()
+            ) return false;
+
+            if(toaDo.khoangCachDenMatPhang(room.getCacMat().get(HinhHopChuNhat.MAT_BCGF))
+                    + toaDo.khoangCachDenMatPhang(room.getCacMat().get(HinhHopChuNhat.MAT_ADHE))
+                        != room.getChieuDai()
+            ) return false;
+        }
         return true;
     }
 
     public boolean doVatKhongChamTran(Room room, DoVat doVat) {
-        // TO DO
-        return true;
+        return !(doVat.getCacMat()
+                .get(HinhHopChuNhat.MAT_DAY_TREN_EFGH)
+                .equals(room.getCacMat().get(HinhHopChuNhat.MAT_DAY_TREN_EFGH))
+        );
     }
 
     public boolean doVatKhongBiVuong(Room room, DoVat doVat) {
@@ -63,12 +75,23 @@ public class RoomService {
     }
 
     public boolean doVatNamTrenSanHoacTrenVatKhac(Room room, DoVat doVat) {
-        // TO DO
-        return true;
+        for (DoVat dv : room.getDanhSachDoVat()) {
+            if (doVat.getCacMat().get(HinhHopChuNhat.MAT_DAY_DUOI_ABCD)
+                .equals(dv.getCacMat().get(HinhHopChuNhat.MAT_DAY_TREN_EFGH))
+            ) return new HinhChuNhat(
+                    dv.getCacDinh().get(HinhHopChuNhat.DINH_A),
+                    dv.getCacDinh().get(HinhHopChuNhat.DINH_B),
+                    dv.getCacDinh().get(HinhHopChuNhat.DINH_C),
+                    dv.getCacDinh().get(HinhHopChuNhat.DINH_D)
+            ).chuaDiem(doVat.getTamDay());
+        }
+
+        return doVat.getCacMat().get(HinhHopChuNhat.MAT_DAY_DUOI_ABCD)
+                .equals(room.getCacMat().get(HinhHopChuNhat.MAT_DAY_DUOI_ABCD));
     }
 
     public boolean themCamera(Room room, Camera camera) {
-        if (cameraNamTrenTuong(room, camera) == null) return false;
+        if (!cameraNamTrenTuong(room, camera)) return false;
         if (!cameraKhongBiTrung(room, camera)) return false;
         if (!cameraSoiVaoTrongPhong(room, camera)) return false;
 
@@ -178,13 +201,16 @@ public class RoomService {
         }
     }
 
-    public MatPhang cameraNamTrenTuong(Room room, Camera camera) {
+    public boolean cameraNamTrenTuong(Room room, Camera camera) {
+        int c = 0;
+
         for (MatPhang matPhang : room.getDanhSachCacMat()) {
             if (matPhang.chuaDiem(camera.getToaDo())) {
-                return matPhang;
+                c += 1;
             }
         }
-        return null;
+
+        return c == 1;
     }
 
     public boolean cameraKhongBiTrung(Room room, Camera camera) {
@@ -246,9 +272,6 @@ public class RoomService {
             }
         }
 
-//        System.out.println("V_ = " + theTichKhongGianPhong(room));
-//        System.out.println(((float) (soLuongDiemNhinThay)/ (float) soLuongDiemXetDuyet * 100) + "");
-
         return theTichKhongGianPhong(room) * (float) soLuongDiemNhinThay / (float) soLuongDiemXetDuyet;
     }
 
@@ -299,13 +322,18 @@ public class RoomService {
         return result;
     }
 
-    public void exportToImageFile(Room room, int phongTo, String fileName, String type) {
-        // TO DO
-        
+    public void showRoomPicture(Room room, int phongTo) {
         if (room == null) return;
 
-        RoomPicture roomPicture = new RoomPicture(room, phongTo);
-        roomPicture.Print(room, phongTo, fileName, type);
+        RoomPicture roomPicture = new RoomPicture(new RoomDrawer(room, phongTo));
+        roomPicture.setVisible(true);
+    }
+
+    public void exportToSVGFile(Room room, int phongTo, String fileName) {
+        if (room == null) return;
+
+        RoomPicture roomPicture = new RoomPicture(new RoomDrawer(room, phongTo));
+        roomPicture.exportSVGFile(fileName);
     }
     
 }

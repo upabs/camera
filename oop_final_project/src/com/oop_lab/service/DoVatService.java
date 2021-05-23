@@ -1,6 +1,7 @@
 package com.oop_lab.service;
 
 import com.oop_lab.model.DoVat;
+import com.oop_lab.model.khong_gian.HinhHopChuNhat;
 import com.oop_lab.model.khong_gian.ToaDo;
 
 import java.util.List;
@@ -15,8 +16,7 @@ public class DoVatService {
     }
 
     public boolean doVatLaHinhHopChuNhat(List<ToaDo> cacDinh) {
-        // TO DO
-        return true;
+        return HinhHopChuNhat.hopLe(cacDinh);
     }
 
     public boolean diemNamTrongDoVat(DoVat doVat, ToaDo toaDo) {

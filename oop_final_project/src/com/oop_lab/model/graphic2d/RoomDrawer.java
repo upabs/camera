@@ -18,6 +18,10 @@ public class RoomDrawer extends JPanel {
     private int phongTo;
 
     public RoomDrawer(Room room, int phongTo) {
+        this.setSize(
+                (int) room.getChieuDai() * phongTo,
+                (int) room.getChieuRong() * phongTo
+        );
         this.room = room;
         this.phongTo = phongTo;
     }
@@ -72,5 +76,13 @@ public class RoomDrawer extends JPanel {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public int getPhongTo() {
+        return phongTo;
+    }
+
+    public void setPhongTo(int phongTo) {
+        this.phongTo = phongTo;
     }
 }

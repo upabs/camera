@@ -55,6 +55,51 @@ public class HinhHopChuNhat {
         this.setCacMatPhang();
     }
 
+    public static boolean hopLe(List<ToaDo> cacDinh) {
+        final int dinhA = 0;
+        final int dinhB = 1;
+        final int dinhC = 2;
+        final int dinhD = 3;
+        final int dinhE = 4;
+        final int dinhF = 5;
+        final int dinhG = 6;
+        final int dinhH = 7;
+
+        return (
+            HinhChuNhat.hopLe(
+                    cacDinh.get(dinhA),
+                    cacDinh.get(dinhB),
+                    cacDinh.get(dinhC),
+                    cacDinh.get(dinhD)
+            ) && HinhChuNhat.hopLe(
+                    cacDinh.get(dinhA),
+                    cacDinh.get(dinhB),
+                    cacDinh.get(dinhF),
+                    cacDinh.get(dinhE)
+            ) && HinhChuNhat.hopLe(
+                    cacDinh.get(dinhA),
+                    cacDinh.get(dinhD),
+                    cacDinh.get(dinhH),
+                    cacDinh.get(dinhE)
+            ) && HinhChuNhat.hopLe(
+                    cacDinh.get(dinhH),
+                    cacDinh.get(dinhG),
+                    cacDinh.get(dinhC),
+                    cacDinh.get(dinhD)
+            ) && HinhChuNhat.hopLe(
+                    cacDinh.get(dinhC),
+                    cacDinh.get(dinhB),
+                    cacDinh.get(dinhF),
+                    cacDinh.get(dinhG)
+            ) && HinhChuNhat.hopLe(
+                    cacDinh.get(dinhE),
+                    cacDinh.get(dinhF),
+                    cacDinh.get(dinhG),
+                    cacDinh.get(dinhH)
+            )
+        );
+    }
+
     private void setCacMatPhang() {
         this.cacMat.put(MAT_DAY_DUOI_ABCD, new MatPhang(
                 new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_E)), 
@@ -101,6 +146,14 @@ public class HinhHopChuNhat {
 
         return (toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_ADHE))
                 + toaDo.khoangCachDenMatPhang(this.cacMat.get(MAT_BCGF))) == this.chieuDai;
+    }
+
+    public ToaDo getTamDay() {
+        Vector vectorAC = new Vector(this.cacDinh.get(DINH_A), this.cacDinh.get(DINH_C));
+        float k = vectorAC.doDai() / 2;
+        ToaDo tmp = this.cacDinh.get(DINH_A).clone();
+        tmp.tinhTien(vectorAC.nhanFloat(k));
+        return tmp;
     }
 
     public List<MatPhang> getDanhSachCacMat() {

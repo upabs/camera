@@ -45,7 +45,7 @@ public class AppController {
 
         while (this.app.isRunning()) {
             int userOption = this.view.menu(this.app.getName(),
-                        "read file input", "show result", "export image", "exit");
+                        "read file input", "show result", "export svg file", "exit");
             switch (userOption) {
                 case 1:
                     this.readDataFromInputFile();
@@ -54,7 +54,7 @@ public class AppController {
                     this.showResult();
                     break;
                 case 3:
-                    this.exportRoomImage();
+                    this.exportSVGFile();
                     break;
                 case 4:
                     this.view.notice("message", "goodbye");
@@ -172,11 +172,17 @@ public class AppController {
         );
 
         this.view.showResult(results);
-//        this.roomService.showRoomPNGPicture(this.app.getRoom(), 150);
+        this.roomService.showRoomPicture(this.app.getRoom(), 150);
     }
 
-    public void exportRoomImage() {
-        this.roomService.exportToImageFile(this.app.getRoom(), 150,"room", "svg");
+    public void exportSVGFile() {
+        this.view.notice(null, "name file: ");
+        String fileName = this.view.getKeyBoard().nextLine();
+        this.view.notice(null, "phong to: ");
+        int phongTo = this.view.getKeyBoard().nextInt();
+        this.view.getKeyBoard().nextLine();
+
+        this.roomService.exportToSVGFile(this.app.getRoom(), phongTo, fileName);
     }
 
     public Room createRoom(float chieuCao, float chieuRong, float chieuDai) {
@@ -237,6 +243,46 @@ public class AppController {
         } else {
             this.view.notice("warning", "adding " + camera + " to room failed");
         }
+    }
+
+    public CameraApp getApp() {
+        return app;
+    }
+
+    public void setApp(CameraApp app) {
+        this.app = app;
+    }
+
+    public AppView getView() {
+        return view;
+    }
+
+    public void setView(AppView view) {
+        this.view = view;
+    }
+
+    public DoVatService getDoVatService() {
+        return doVatService;
+    }
+
+    public void setDoVatService(DoVatService doVatService) {
+        this.doVatService = doVatService;
+    }
+
+    public CameraService getCameraService() {
+        return cameraService;
+    }
+
+    public void setCameraService(CameraService cameraService) {
+        this.cameraService = cameraService;
+    }
+
+    public RoomService getRoomService() {
+        return roomService;
+    }
+
+    public void setRoomService(RoomService roomService) {
+        this.roomService = roomService;
     }
 }
 

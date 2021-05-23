@@ -47,13 +47,13 @@ public class Test {
         cacDinh.add(new ToaDo(0.5f, 0.75f, 0.5f));
 
         DoVat doVat = doVatService.createDoVat(cacDinh);
-//        roomService.themDoVat(room, doVat);
+        roomService.themDoVat(room, doVat);
 
         float f = roomService.theTichVungNhinThay(room, 100, 100, 100);
         System.out.println("V = " + f);
 
 //        cameraService.toaDoChieuCameraLenOxy(camera1, room);
 //        roomService.showRoomPNGPicture(room, 150);
-       roomService.exportToImageFile(room, 150, "room", "svg");
+//       roomService.exportToSVGFile(room, 150, "room");
     }
 }
