@@ -91,7 +91,7 @@ public class HinhChop {
                 this.cacDinh.get(DINH_B),
                 this.cacDinh.get(DINH_C),
                 this.cacDinh.get(DINH_D)
-        ).chuaDiem(giaoDiem) && new DoanThang(dinhChopE, giaoDiem).chuaDiem(diemM);
+        ).chuaDiem(giaoDiem) && diemM.namTrenDoanThang(new DoanThang(dinhChopE, giaoDiem));
     }
 
     public List<MatPhang> danhSachCacMat() {

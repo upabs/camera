@@ -29,14 +29,15 @@ public class HinhChuNhat {
         DuongThang cd = new DuongThang(
                 dinhC, new Vector(dinhC, dinhD), true);
 
-        return (
-            toaDo.khoangCachToiDuongThang(ab)
-                    + toaDo.khoangCachToiDuongThang(cd)
-                    == this.dinhA.khoangCach(this.dinhD) &&
-            toaDo.khoangCachToiDuongThang(ad)
-                    + toaDo.khoangCachToiDuongThang(bc)
-                    == this.dinhA.khoangCach(this.dinhB)
-        );
+        float tong1 = (float) (Math.round((toaDo.khoangCachToiDuongThang(ab)
+                    + toaDo.khoangCachToiDuongThang(cd)) * 1000000.0) / 1000000.0);
+        float doDaiAD = (float) (Math.round(this.dinhA.khoangCach(this.dinhD)*1000000.0)/1000000.0);
+
+        float tong2 = (float) (Math.round((toaDo.khoangCachToiDuongThang(ad)
+                + toaDo.khoangCachToiDuongThang(bc)) * 1000000.0) / 1000000.0);
+        float doDaiAB = (float) (Math.round(this.dinhA.khoangCach(this.dinhB)*1000000.0)/1000000.0);
+
+        return (tong1 == doDaiAD && tong2 == doDaiAB);
     }
 
     public ToaDo getDinhA() {

@@ -247,6 +247,9 @@ public class RoomService {
             }
         }
 
+//        System.out.println("V_ = " + theTichKhongGianPhong(room));
+//        System.out.println(((float) (soLuongDiemNhinThay)/ (float) soLuongDiemXetDuyet * 100) + "");
+
         return theTichKhongGianPhong(room) * (float) soLuongDiemNhinThay / (float) soLuongDiemXetDuyet;
     }
 
@@ -264,8 +267,9 @@ public class RoomService {
     public boolean diemNamTrongVungNhinDuoc(Room room, ToaDo toaDo) {
         List<Camera> dsCamera = this.danhSachCameraCoKhaNangNhinDuocDiem(room, toaDo);
 
-        if (dsCamera.isEmpty())
+        if (dsCamera.isEmpty()) {
             return false;
+        }
 
         List<DoVat> dsDoVat = room.getDanhSachDoVat();
         for (Camera camera : dsCamera) {
