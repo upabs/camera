@@ -45,9 +45,9 @@ public class RoomService {
         
         Vector AD = new Vector(dsCacDinh.get(A), dsCacDinh.get(D));
 
-        if (!AB.equals(DC))     return false;   // ABCD <> hbh
-        if (!EF.equals(HG))     return false;   // EFGH <> hbh
-        if (!AE.equals(CG))     return false;   // AEDH <> hbh
+        if (!AB.equals(DC) || Math.round(AB.doDai() *1000)/1000 == 0)     return false;   // ABCD <> hbh
+        if (!EF.equals(HG) || Math.round(EF.doDai() *1000)/1000 == 0)     return false;   // EFGH <> hbh
+        if (!AE.equals(CG) || Math.round(AE.doDai() *1000)/1000 == 0)     return false;   // AEDH <> hbh
     
         // AB ⊥ AD ⊥ AE
         if (AB.tichVoHuong(AD) != 0)    return false;
