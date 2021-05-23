@@ -55,49 +55,30 @@ public class HinhHopChuNhat {
         this.setCacMatPhang();
     }
 
-    public static boolean hopLe(List<ToaDo> cacDinh) {
-        final int dinhA = 0;
-        final int dinhB = 1;
-        final int dinhC = 2;
-        final int dinhD = 3;
-        final int dinhE = 4;
-        final int dinhF = 5;
-        final int dinhG = 6;
-        final int dinhH = 7;
+    public static boolean hopLe(List<ToaDo> dsCacDinh) {
+        int A = 0, B = 1, C = 2, D = 3,
+                E = 4, F = 5, G = 6, H = 7;
 
-        return (
-            HinhChuNhat.hopLe(
-                    cacDinh.get(dinhA),
-                    cacDinh.get(dinhB),
-                    cacDinh.get(dinhC),
-                    cacDinh.get(dinhD)
-            ) && HinhChuNhat.hopLe(
-                    cacDinh.get(dinhA),
-                    cacDinh.get(dinhB),
-                    cacDinh.get(dinhF),
-                    cacDinh.get(dinhE)
-            ) && HinhChuNhat.hopLe(
-                    cacDinh.get(dinhA),
-                    cacDinh.get(dinhD),
-                    cacDinh.get(dinhH),
-                    cacDinh.get(dinhE)
-            ) && HinhChuNhat.hopLe(
-                    cacDinh.get(dinhH),
-                    cacDinh.get(dinhG),
-                    cacDinh.get(dinhC),
-                    cacDinh.get(dinhD)
-            ) && HinhChuNhat.hopLe(
-                    cacDinh.get(dinhC),
-                    cacDinh.get(dinhB),
-                    cacDinh.get(dinhF),
-                    cacDinh.get(dinhG)
-            ) && HinhChuNhat.hopLe(
-                    cacDinh.get(dinhE),
-                    cacDinh.get(dinhF),
-                    cacDinh.get(dinhG),
-                    cacDinh.get(dinhH)
-            )
-        );
+        Vector AB = new Vector(dsCacDinh.get(A), dsCacDinh.get(B));
+        Vector DC = new Vector(dsCacDinh.get(D), dsCacDinh.get(C));
+        Vector EF = new Vector(dsCacDinh.get(E), dsCacDinh.get(F));
+        Vector HG = new Vector(dsCacDinh.get(H), dsCacDinh.get(G));
+
+        Vector AE = new Vector(dsCacDinh.get(A), dsCacDinh.get(E));
+        Vector CG = new Vector(dsCacDinh.get(C), dsCacDinh.get(G));
+
+        Vector AD = new Vector(dsCacDinh.get(A), dsCacDinh.get(D));
+
+        if (!AB.equals(DC) || Math.round(AB.doDai() *1000)/1000 == 0)     return false;   // ABCD <> hbh
+        if (!EF.equals(HG) || Math.round(EF.doDai() *1000)/1000 == 0)     return false;   // EFGH <> hbh
+        if (!AE.equals(CG) || Math.round(AE.doDai() *1000)/1000 == 0)     return false;   // AEDH <> hbh
+
+        // AB ⊥ AD ⊥ AE
+        if (AB.tichVoHuong(AD) != 0)    return false;
+        if (AE.tichVoHuong(AB) != 0)    return false;
+        if (AE.tichVoHuong(AD) != 0)    return false;
+
+        return true;
     }
 
     private void setCacMatPhang() {
