@@ -3,6 +3,7 @@ package com.oop_lab.service;
 import com.oop_lab.model.Camera;
 import com.oop_lab.model.DoVat;
 import com.oop_lab.model.Room;
+import com.oop_lab.model.graphic2d.RoomPNGDrawer;
 import com.oop_lab.model.graphic2d.RoomPicture;
 import com.oop_lab.model.khong_gian.DoanThang;
 import com.oop_lab.model.khong_gian.HinhChop;
@@ -295,19 +296,16 @@ public class RoomService {
         return result;
     }
 
-    public void showRoomPicture(Room room, int phongTo) {
+    public void showRoomPNGPicture(Room room, int phongTo) {
         if (room == null) return;
 
-        RoomPicture roomPicture = new RoomPicture(room, phongTo);
+        RoomPicture roomPicture = new RoomPicture(new RoomPNGDrawer(room, phongTo));
         roomPicture.setVisible(true);
     }
     
     public void exportToImageFile(Room room, int phongTo, String fileName, String type) {
-        // TO DO
-        
         if (room == null) return;
 
-        RoomPicture roomPicture = new RoomPicture(room, phongTo);
-        roomPicture.Print(room, phongTo, fileName, type);
+        RoomPicture roomPicture = new RoomPicture(new RoomPNGDrawer(room, phongTo));
     }
 }
