@@ -131,7 +131,6 @@ public class AppController {
                     this.themCameraVaoPhong(camera);
             }
             
-            SVG_export();
 
             sc.close();
         } catch (FileNotFoundException e) {
@@ -173,11 +172,11 @@ public class AppController {
         );
 
         this.view.showResult(results);
-        this.roomService.showRoomPNGPicture(this.app.getRoom(), 150);
+//        this.roomService.showRoomPNGPicture(this.app.getRoom(), 150);
     }
 
     public void exportRoomImage() {
-        this.roomService.exportToImageFile(this.app.getRoom(), 150,"room", "png");
+        this.roomService.exportToImageFile(this.app.getRoom(), 150,"room", "svg");
     }
 
     public Room createRoom(float chieuCao, float chieuRong, float chieuDai) {
@@ -237,40 +236,6 @@ public class AppController {
             this.view.notice("message", "successfully added " + camera + " to the room");
         } else {
             this.view.notice("warning", "adding " + camera + " to room failed");
-        }
-    }
-
-    public void SVG_export() {
-        // Update file .svg
-        try {
-            File myObj = new File("room.svg");
-            if (myObj.createNewFile() || myObj.exists()) {
-                System.out.println("File created: " + myObj.getName());
-                BufferedWriter f = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream("room.svg"), "UTF-8"));
-                f.write("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\""
-                        + " width=\"1000\" height=\"1000\">");
-                float A = this.app.getRoom().getChieuDai();
-                float B = this.app.getRoom().getChieuRong();
-
-                f.newLine();
-                f.write("<rect width=\"" + A * 500 + "\" height=\"" + B * 500 + "\" "
-                        + "style=\"fill:rgb(255,255,255);"
-                        + "stroke-width:1;stroke:rgb(0,0,0)\" />");
-                f.newLine();
-                for (DoVat item : this.app.getRoom().getDanhSachDoVat()) {
-                    float C = item.getChieuDai();
-                    float D = item.getChieuRong();
-                    f.write("<rect width=\"" + C * 500 + "\" height=\"" + D * 500 + "\" "
-                            + "style=\"fill:rgb(0,0,255);"
-                            + "stroke-width:1;stroke:rgb(0,0,0)\" />");
-                }
-                f.write("</svg>");
-                f.close();
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
     }
 }
