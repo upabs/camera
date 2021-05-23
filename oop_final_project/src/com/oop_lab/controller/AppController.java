@@ -173,7 +173,7 @@ public class AppController {
         );
 
         this.view.showResult(results);
-        this.roomService.showRoomPicture(this.app.getRoom(), 150);
+        this.roomService.showRoomPNGPicture(this.app.getRoom(), 150);
     }
 
     public void exportRoomImage() {
