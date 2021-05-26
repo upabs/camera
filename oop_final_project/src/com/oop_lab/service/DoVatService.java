@@ -31,9 +31,11 @@ public class DoVatService {
         
         Vector AD = new Vector(dsCacDinh.get(A), dsCacDinh.get(D));
 
-        if (!AB.equals(DC) || Math.round(AB.doDai() *1000)/1000 == 0)     return false;   // ABCD <> hbh
-        if (!EF.equals(HG) || Math.round(EF.doDai() *1000)/1000 == 0)     return false;   // EFGH <> hbh
-        if (!AE.equals(CG) || Math.round(AE.doDai() *1000)/1000 == 0)     return false;   // AEDH <> hbh
+        if ((float) Math.round(AD.doDai() *1000000)/1000000 == 0)   return false;
+
+        if (!AB.equals(DC) || (float) Math.round(AB.doDai() *1000000)/1000000 == 0)     return false;   // ABCD <> hbh
+        if (!EF.equals(HG) || (float) Math.round(EF.doDai() *1000000)/1000000 == 0)     return false;   // EFGH <> hbh
+        if (!AE.equals(CG) || (float) Math.round(AE.doDai() *1000000)/1000000 == 0)     return false;   // AEDH <> hbh
     
         // AB ⊥ AD ⊥ AE
         if (AB.tichVoHuong(AD) != 0)    return false;
