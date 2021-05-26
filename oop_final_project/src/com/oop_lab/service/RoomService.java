@@ -284,7 +284,8 @@ public class RoomService {
                     toaDoDiemDangXet.tinhTien(stepAB.nhanFloat(i));
                     toaDoDiemDangXet.tinhTien(stepAD.nhanFloat(j));
                     toaDoDiemDangXet.tinhTien(stepAE.nhanFloat(k));
-                    
+                    // System.out.println(toaDoDiemDangXet.toString());
+
                     if (this.diemNamTrongDoVatNaoDo(room, toaDoDiemDangXet)) {
                         continue;
                     }
@@ -293,7 +294,6 @@ public class RoomService {
                         soLuongDiemNhinThay += 1;
 
                     soLuongDiemXetDuyet += 1;
-                    // System.out.println(toaDoDiemDangXet.toString());
                 }
             }
         }
